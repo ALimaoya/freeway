@@ -1,0 +1,53 @@
+body,dl,dd,ul,ol,h1,h2,h3,h4,h5,h6,pre,form,input,textarea,p,hr,thead,tbody,tfoot,th,td{margin:0;padding:0;}
+ul,ol{list-style:none;}
+a{text-decoration:none;}
+html{-ms-text-size-adjust:none;-webkit-text-size-adjust:none;text-size-adjust:none;}
+body{line-height:1.5; font-size:14px;}
+body,button,input,select,textarea{font-family:'helvetica neue',tahoma,'hiragino sans gb',stheiti,'wenquanyi micro hei',\5FAE\8F6F\96C5\9ED1,\5B8B\4F53,sans-serif;}
+b,strong{font-weight:bold;}
+i,em{font-style:normal;}
+html{
+    font-size: 100px!important;
+}
+html,body,#app,#detail{
+    height: 100%;
+
+}
+.mint-header{
+    height: 0.5rem !important;
+    font-size: 0.14rem!important;
+
+}
+.bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 0.5rem;
+    padding: 0.07rem;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0.5rem;
+    border-top: 1px solid #dedede;
+    width: 100%;
+    background: #eee;
+
+}
+.bottom li{
+    flex: 1;
+}
+.bottom li a{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bottom li a img{
+    width: 0.2rem;
+    height: 0.2rem;
+}
+.bottom li a span{
+    font-size: 0.12rem;
+    color: #999;
+}
