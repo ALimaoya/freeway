@@ -186,10 +186,11 @@
         },
         mounted() {
              this.type = location.href.split('type=')[1];
-             this.createCharts();
-             this.createMoreCharts();
+             this.turnTo(this.type);
+
         },
         methods: {
+            // 年度通车详情
             createCharts () {
                 var dom = document.getElementById("container");
                 var myChart = echarts.init(dom);
@@ -202,9 +203,7 @@
                         text: this.pageItem[this.type].name,
                         top: 'top',
                         left: 'center',
-                        x:'center',
-                        y: 'top',
-                        textAlign: 'center',
+                        // textAlign: 'center',
                         textStyle: {
                             fontSize: 16,
                             fontStyle: 'normal',
@@ -223,14 +222,20 @@
                     },
                     grid: {
                         left: '3%',
-                        right: '4%',
+                        right: '12%',
                         bottom: '3%',
                         containLabel: true
                     },
                     xAxis : [
                         {
+                            show: 'false',
+                            name: '年份',
+                            nameLocation: 'end',
                             type : 'category',
-                            data : ['2013', '2014', '2015', '2016', '2017', '2018', '2019'],
+                            data : ['2014', '2015', '2016', '2017', '2018'],
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
@@ -252,6 +257,11 @@
                     yAxis : [
                         {
                             type : 'value',
+                            name: 'km',
+                            nameLocation: 'end',
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
@@ -274,10 +284,168 @@
                     ],
                     series : [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '60%',
-                            data:[10, 52, 200, 334, 390, 330, 220]
+                            data: [5924.056, 6381.741, 6612.415, 6754.299, 6799.399],
+                            itemStyle: {
+                                normal: {
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 14
+                                        },
+                                        color: echarts.graphic.LinearGradient(
+                                            0, 0, 0, 1,
+                                            [
+                                                {offset: 0, color: 'rgba(255,255,255,0)'},
+                                                {offset: 0.5, color: '#188df0'},
+                                                {offset: 1, color: '#188df0'}
+                                            ]
+
+                                            // [
+                                            //     {offset: 0, color: '#1afdf0'},
+                                            //     // {offset: 0.5, color: '#1f8df0'},
+                                            //     {offset: 1, color: '#1834f0'}
+                                            // ]
+                                        )
+
+                                    }
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            },
+            // 基础设施
+            createBase () {
+                var dom = document.getElementById("container");
+                var myChart = echarts.init(dom);
+                var app = {};
+                option = null;
+                app.title = '坐标轴刻度与标签对齐';
+                option = {
+                    title: {
+                        text: '基础设施',
+                        textStyle: {
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+                        // subtext: '虚构数据',
+                        left: 'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    backgroundColor: '#191970',
+                    series : [
+                        {
+                            type: 'pie',
+                            radius : '45%',
+                            center: ['50%', '50%'],
+                            selectedMode: 'single',
+                            data:[
+                                {
+                                    value:129,
+                                    name: '还贷中心',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '还贷中心',
+                                                '隧道数量：129座',
+                                                '比例：45.42%'
+                                            ].join('\n'),
+                                            // rich: {
+                                            //     // abg: {
+                                            //     //     backgroundColor: '#333',
+                                            //     //     width: '100%',
+                                            //     //     align: 'right',
+                                            //     //     height: 25,
+                                            //     //     borderRadius: [4, 4, 0, 0]
+                                            //     // },
+                                            //     // hr: {
+                                            //     //     borderColor: '#777',
+                                            //     //     width: '100%',
+                                            //     //     borderWidth: 0.5,
+                                            //     //     height: 0
+                                            //     // },
+                                            //     // value: {
+                                            //     //     width: 20,
+                                            //     //     padding: [0, 20, 0, 30],
+                                            //     //     align: 'left'
+                                            //     // },
+                                            //     // valueHead: {
+                                            //     //     color: '#333',
+                                            //     //     width: 20,
+                                            //     //     padding: [0, 20, 0, 30],
+                                            //     //     align: 'center'
+                                            //     // },
+                                            //     // rate: {
+                                            //     //     width: 40,
+                                            //     //     align: 'right',
+                                            //     //     padding: [0, 10, 0, 0]
+                                            //     // },
+                                            //     // rateHead: {
+                                            //     //     color: '#333',
+                                            //     //     width: 40,
+                                            //     //     align: 'center',
+                                            //     //     padding: [0, 10, 0, 0]
+                                            //     // }
+                                            // }
+                                        }
+                                    }
+                                },
+                                {
+                                    value:121, name: '其他主体',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '其他主体',
+                                                '隧道数量：121',
+                                                '比例：42.61%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                            },
+                                {
+                                    value:14, name: '省公路局及省建投',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '省公路局及省建投',
+                                                '隧道数量：14座',
+                                                '比例：4.93%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                },
+                                {value:20, name: '交投集团',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '交投集团',
+                                                '涵洞数量：20座',
+                                                '比例：7.04%'
+                                            ].join('\n'),
+                                        }
+                                    }}
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
                         }
                     ]
                 };
@@ -669,6 +837,19 @@
                     this.show = !this.show;
 
                 }
+            },
+            // 跳转到对应详情
+            turnTo (index) {
+                this.leftBox = false;
+                this.type = index;
+                if (index*1 === 0) {
+                    this.createCharts();
+                }
+                if (index*1 === 1) {
+                    this.createBase();
+                }
+                this.createMoreCharts();
+
             }
         }
     })
