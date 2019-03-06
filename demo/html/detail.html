@@ -183,7 +183,12 @@
             ],
             leftBox: false,
             funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-            '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端']
+            '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+            date1: ['2014', '2015', '2016', '2017', '2018'],
+            value1: [5924.056, 6381.741, 6612.415, 6754.299, 6799.399],
+            value1_11: [554.12,730.75,730.75,872.63,872.63],
+            value1_12: [2539.74,2539.74,2681.30,2681.30,2681.30]
+
         },
         mounted() {
              this.type = location.href.split('type=')[1];
@@ -213,7 +218,7 @@
                         },
 
                     },
-                    color: ['#1E90FF'],
+                    // color: ['#1E90FF'],
                     backgroundColor: '#191970',
                     tooltip : {
                         trigger: 'axis',
@@ -233,7 +238,7 @@
                             name: '年份',
                             nameLocation: 'end',
                             type : 'category',
-                            data : ['2014', '2015', '2016', '2017', '2018'],
+                            data : this.date1,
                             splitLine: {
                                 "show": false
                             },
@@ -278,19 +283,24 @@
                             axisLabel:{
                                 color:'#fff'
                             },
-
-
                         },
-
                     ],
                     series : [
                         {
-                            name: '直接访问',
+                            name: '',
                             type: 'bar',
-                            barWidth: '60%',
-                            data: [5924.056, 6381.741, 6612.415, 6754.299, 6799.399],
+                            barWidth: '30%',
+                            data: this.value1_11,
                             itemStyle: {
                                 normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                    ,false),
                                     label: {
                                         show: true, //开启显示
                                         position: 'top', //在上方显示
@@ -298,25 +308,11 @@
                                             color: 'white',
                                             fontSize: 14
                                         },
-                                        color: echarts.graphic.LinearGradient(
-                                            0, 0, 0, 1,
-                                            [
-                                                {offset: 0, color: 'rgba(255,255,255,0)'},
-                                                {offset: 0.5, color: '#188df0'},
-                                                {offset: 1, color: '#188df0'}
-                                            ]
-
-                                            // [
-                                            //     {offset: 0, color: '#1afdf0'},
-                                            //     // {offset: 0.5, color: '#1f8df0'},
-                                            //     {offset: 1, color: '#1834f0'}
-                                            // ]
-                                        )
-
                                     }
                                 },
                             }
-                        }
+                        },
+
                     ]
                 };
                 if (option && typeof option === "object") {
@@ -365,43 +361,6 @@
                                                 '隧道数量：129座',
                                                 '比例：45.42%'
                                             ].join('\n'),
-                                            // rich: {
-                                            //     // abg: {
-                                            //     //     backgroundColor: '#333',
-                                            //     //     width: '100%',
-                                            //     //     align: 'right',
-                                            //     //     height: 25,
-                                            //     //     borderRadius: [4, 4, 0, 0]
-                                            //     // },
-                                            //     // hr: {
-                                            //     //     borderColor: '#777',
-                                            //     //     width: '100%',
-                                            //     //     borderWidth: 0.5,
-                                            //     //     height: 0
-                                            //     // },
-                                            //     // value: {
-                                            //     //     width: 20,
-                                            //     //     padding: [0, 20, 0, 30],
-                                            //     //     align: 'left'
-                                            //     // },
-                                            //     // valueHead: {
-                                            //     //     color: '#333',
-                                            //     //     width: 20,
-                                            //     //     padding: [0, 20, 0, 30],
-                                            //     //     align: 'center'
-                                            //     // },
-                                            //     // rate: {
-                                            //     //     width: 40,
-                                            //     //     align: 'right',
-                                            //     //     padding: [0, 10, 0, 0]
-                                            //     // },
-                                            //     // rateHead: {
-                                            //     //     color: '#333',
-                                            //     //     width: 40,
-                                            //     //     align: 'center',
-                                            //     //     padding: [0, 10, 0, 0]
-                                            //     // }
-                                            // }
                                         }
                                     }
                                 },
@@ -498,7 +457,10 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+                            data : this.date1,
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
@@ -513,19 +475,19 @@
                             axisLabel:{
                                 color:'#fff'
                             },   // x轴字体颜色
-
-
                         }
                     ],
                     yAxis : [
                         {
                             type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
                                     color:'#fff'
                                 },
-
                             },
                             axisLine: {
                                 lineStyle:{
@@ -535,8 +497,6 @@
                             axisLabel:{
                                 color:'#fff'
                             },
-
-
                         },
 
                     ],
@@ -545,7 +505,7 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '60%',
-                            data:[10, 52, 200, 334, 390, 330, 220]
+                            data:this.value1_11
                         }
                     ]
                 };
@@ -572,7 +532,32 @@
                         },
 
                     },
-                    color: ['#1E90FF'],
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '5%',
+                        show : true,
+                        itemGap : 10,
+                        itemWidth : 30,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '交投集团（中原）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '交投集团（高新）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            }
+                        ]
+                    },
+                    // color: ['#1E90FF'],
                     backgroundColor: '#191970',
                     tooltip : {
                         trigger: 'axis',
@@ -589,7 +574,10 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : ['2-22', '2-23', '2-24', '2-25', '2-26', '2-27', '2-28'],
+                            data : this.date1,
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
@@ -604,13 +592,14 @@
                             axisLabel:{
                                 color:'#fff'
                             },   // x轴字体颜色
-
-
                         }
                     ],
                     yAxis : [
                         {
                             type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
                             axisTick: {
                                 alignWithLabel: true,
                                 lineStyle:{
@@ -626,17 +615,62 @@
                             axisLabel:{
                                 color:'#fff'
                             },
-
-
                         },
 
                     ],
                     series : [
                         {
-                            name:'直接访问',
-                            type:'bar',
-                            barWidth: '60%',
-                            data:[10, 52, 200, 334, 390, 330, 220]
+                            name: '交投集团（中原）',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_11,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        ,false),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+                                    }
+                                },
+                            }
+                        },
+                        {
+                            name: '交投集团（高新）',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_12,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#188df0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#888df0'}
+                                        ]
+                                    ),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+
+                                    }
+                                },
+                            }
                         }
                     ]
                 };
