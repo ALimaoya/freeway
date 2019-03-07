@@ -23,21 +23,21 @@
     </mt-header>
 
     <div v-if="type == 0" class="mt50">
-        <mt-navbar v-model="selected">
+        <mt-navbar v-model="selected1">
             <mt-tab-item id="1-1">通车里程</mt-tab-item>
             <mt-tab-item id="1-2">在建里程</mt-tab-item>
         </mt-navbar>
-        <mt-tab-container v-model="selected">
+        <mt-tab-container v-model="selected1">
             <mt-tab-container-item id="1-1">
                 <div id="container1"></div>
                 <!--<div class="icon-wrap">-->
                     <!--<image class="icon" :class="show?'rotation':(show=== false?'rotation2':'')" src="../images/warrior.png" @click="showCharts"></image>-->
                 <!--</div>-->
                 <div class="charts-wrap">
-                    <div id="container1-11" ></div>
-                    <div id="container1-12" ></div>
-                    <div id="container1-13" ></div>
-                    <div id="container1-14" ></div>
+                    <div id="container1-11"></div>
+                    <div id="container1-12"></div>
+                    <div id="container1-13"></div>
+                    <div id="container1-14"></div>
                     <!--<div class="table-wrap" :class="show?'slideDown':(show===false?'slideUp':'')">-->
                         <!--<ul class="search">-->
                             <!--<li>-->
@@ -111,13 +111,38 @@
         </mt-tab-container>
     </div>
     <div v-if="type == 1" class="mt50">
-        <mt-navbar v-model="selected">
-            <mt-tab-item id="2-1" >通车里程</mt-tab-item>
-            <mt-tab-item id="2-2">在建里程</mt-tab-item>
+        <mt-navbar v-model="selected2">
+            <mt-tab-item id="2-1" >路面</mt-tab-item>
+            <mt-tab-item id="2-2">桥梁</mt-tab-item>
+            <mt-tab-item id="2-3">隧道</mt-tab-item>
         </mt-navbar>
-        <mt-tab-container v-model="selected">
+        <mt-tab-container v-model="selected2">
             <mt-tab-container-item id="2-1">
-                <div id="container2"></div>
+                <div id="container2-1"></div>
+                <div class="charts-wrap">
+                    <div id="container2-11" ></div>
+                    <div id="container2-12" ></div>
+                    <div id="container2-13" ></div>
+                    <div id="container2-14" ></div>
+                </div>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="2-2">
+                <div id="container2-2"></div>
+                <div class="charts-wrap">
+                    <div id="container2-21" ></div>
+                    <div id="container2-22" ></div>
+                    <div id="container2-23" ></div>
+                    <div id="container2-24" ></div>
+                </div>
+            </mt-tab-container-item>
+            <mt-tab-container-item id="2-3">
+                <div id="container2-3"></div>
+                <div class="charts-wrap">
+                    <div id="container2-31" ></div>
+                    <div id="container2-32" ></div>
+                    <div id="container2-33" ></div>
+                    <div id="container2-34" ></div>
+                </div>
             </mt-tab-container-item>
         </mt-tab-container>
     </div>
@@ -202,7 +227,8 @@
 
             ],
             type: 0,
-            selected: '1-2',
+            selected1: '1-1',
+            selected2: '2-1',
             show: '',
             dataList: [
                 {
@@ -257,19 +283,20 @@
 
         },
         watch:{
-            selected: function (newVal,oldVal) {
-                if (newVal == '1-1') {
-                    this.createMoreCharts(1)
-                }
-                if (newVal == '1-2') {
-                    this.createMoreCharts(2)
-                }
-            }
+            // selected: function (newVal,oldVal) {
+            //     if (newVal == '1-1') {
+            //         this.createMoreCharts(1)
+            //     }
+            //     if (newVal == '1-2') {
+            //         this.createMoreCharts(2)
+            //     }
+            // }
         },
         methods: {
             // 年度通车详情
             createCharts () {
                 var dom = document.getElementById("container1");
+                dom.style.width = window.innerWidth+'px';
                 var myChart = echarts.init(dom);
                 var app = {};
                 option = null;
@@ -291,12 +318,6 @@
                     },
                     // color: ['#1E90FF'],
                     backgroundColor: '#191970',
-                    tooltip : {
-                        trigger: 'axis',
-                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                        }
-                    },
                     grid: {
                         left: '3%',
                         right: '12%',
@@ -392,14 +413,20 @@
             },
             // 基础设施
             createBase () {
-                var dom = document.getElementById("container2");
-                var myChart = echarts.init(dom);
-                var app = {};
-                option = null;
-                app.title = '坐标轴刻度与标签对齐';
+                var dom1 = document.getElementById("container2-1");
+                var dom2 = document.getElementById("container2-2");
+                var dom3 = document.getElementById("container2-3");
+                console.log(dom1)
+                dom1.style.width = window.innerWidth+'px';
+                dom2.style.width = window.innerWidth+'px';
+                dom3.style.width = window.innerWidth+'px';
+                var charts = [];
+                var myChart = echarts.init(dom1);
+                // option = null;
+                // app.title = '坐标轴刻度与标签对齐';
                 option = {
                     title: {
-                        text: '基础设施',
+                        text: '基础设施 路网',
                         textStyle: {
                             fontSize: 16,
                             fontStyle: 'normal',
@@ -407,6 +434,182 @@
                             color: '#CDAD00',
                         },
                         // subtext: '虚构数据',
+                        left: 'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    backgroundColor: '#191970',
+                    series : [
+                        {
+                            type: 'pie',
+                            radius : '45%',
+                            center: ['50%', '50%'],
+                            selectedMode: 'single',
+                            data:[
+                                {
+                                    value:1256.343,
+                                    name: '还贷中心',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '还贷中心',
+                                                '管养里程：1256.343km',
+                                                '比例：19.43%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                },
+                                {value:3553.938, name: '交投集团',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '交投集团',
+                                                '管养里程：3553.938km',
+                                                '比例：54.98%'
+                                            ].join('\n'),
+                                        }
+                                    }},
+                                {
+                                    value:255.417, name: '省公路局及省建投',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '省公路局及省建投',
+                                                '管养里程：255.417km',
+                                                '比例：3.95%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                },
+                                {
+                                    value:1398.814, name: '其他主体',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '其他主体',
+                                                '管养里程：1398.814km',
+                                                '比例：21.64%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                }
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                // myChart.setOption(option);
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                charts.push(myChart);
+                myChart = echarts.init(dom2);
+                option = {
+                    title: {
+                        text: '基础设施 桥梁',
+                        textStyle: {
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+                        left: 'center'
+                    },
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b} : {c} ({d}%)"
+                    },
+                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    backgroundColor: '#191970',
+                    series : [
+                        {
+                            type: 'pie',
+                            radius : '45%',
+                            center: ['50%', '50%'],
+                            selectedMode: 'single',
+                            data:[
+                                {
+                                    value:3898,
+                                    name: '还贷中心',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '还贷中心',
+                                                '桥梁数量：3898座',
+                                                '比例：24.91%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                },
+                                {value:7608, name: '交投集团',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '交投集团',
+                                                '桥梁数量：7608座',
+                                                '比例：38%'
+                                            ].join('\n'),
+                                        }
+                                    }},
+                                {
+                                    value:653, name: '省公路局及省建投',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '省公路局及省建投',
+                                                '桥梁数量：653座',
+                                                '比例：4.24%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                },
+                                {
+                                    value:3307, name: '其他主体',
+                                    label: {
+                                        normal: {
+                                            formatter: [
+                                                '其他主体',
+                                                '隧道数量：3307座',
+                                                '比例：21.47%'
+                                            ].join('\n'),
+                                        }
+                                    }
+                                }
+                            ],
+                            itemStyle: {
+                                emphasis: {
+                                    shadowBlur: 10,
+                                    shadowOffsetX: 0,
+                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                }
+                            }
+                        }
+                    ]
+                };
+                // myChart.setOption(option);
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                charts.push(myChart);
+                myChart = echarts.init(dom3);
+                option = {
+                    title: {
+                        text: '基础设施 隧道',
+                        textStyle: {
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
                         left: 'center'
                     },
                     tooltip : {
@@ -435,18 +638,16 @@
                                         }
                                     }
                                 },
-                                {
-                                    value:121, name: '其他主体',
+                                {value:20, name: '交投集团',
                                     label: {
                                         normal: {
                                             formatter: [
-                                                '其他主体',
-                                                '隧道数量：121',
-                                                '比例：42.61%'
+                                                '交投集团',
+                                                '涵洞数量：20座',
+                                                '比例：7.04%'
                                             ].join('\n'),
                                         }
-                                    }
-                                            },
+                                    }},
                                 {
                                     value:14, name: '省公路局及省建投',
                                     label: {
@@ -459,16 +660,19 @@
                                         }
                                     }
                                 },
-                                {value:20, name: '交投集团',
+                                {
+                                    value:121, name: '其他主体',
                                     label: {
                                         normal: {
                                             formatter: [
-                                                '交投集团',
-                                                '涵洞数量：20座',
-                                                '比例：7.04%'
+                                                '其他主体',
+                                                '隧道数量：121座',
+                                                '比例：42.61%'
                                             ].join('\n'),
                                         }
-                                    }}
+                                    }
+                                },
+
                             ],
                             itemStyle: {
                                 emphasis: {
@@ -480,24 +684,174 @@
                         }
                     ]
                 };
+                // myChart.setOption(option);
                 if (option && typeof option === "object") {
                     myChart.setOption(option, true);
                 }
+                charts.push(myChart);
+                window.onresize = function () {
+                    charts.map(i => {
+                        i.resize()
+                    })
+                }
             },
             createNowCharts () {
+                var charts1 = document.getElementById('container2-11');
+                var charts2 = document.getElementById('container2-12');
+                var charts3 = document.getElementById('container2-13');
+                var charts4 = document.getElementById('container2-14');
+                var charts5 = document.getElementById('container2-21');
+                var charts6 = document.getElementById('container2-22');
+                var charts7 = document.getElementById('container2-23');
+                var charts8 = document.getElementById('container2-24');
+                var charts9 = document.getElementById('container2-31');
+                var charts10 = document.getElementById('container2-32');
+                var charts11 = document.getElementById('container2-33');
+                var charts12 = document.getElementById('container2-34');
+                var charts = [];
+                charts1.style.width = window.innerWidth+'px';
+                charts2.style.width = window.innerWidth+'px';
+                charts3.style.width = window.innerWidth+'px';
+                charts4.style.width = window.innerWidth+'px';
+                charts5.style.width = window.innerWidth+'px';
+                charts6.style.width = window.innerWidth+'px';
+                charts7.style.width = window.innerWidth+'px';
+                charts8.style.width = window.innerWidth+'px';
+                charts9.style.width = window.innerWidth+'px';
+                charts10.style.width = window.innerWidth+'px';
+                charts11.style.width = window.innerWidth+'px';
+                charts12.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(charts1);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '还贷中心',
+                        top: 'top',
+                        left: 'center',
+                        textAlign: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
 
+                    },
+                    color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.date1,
+                            name: '年份',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'直接访问',
+                            type:'bar',
+                            barWidth: '30%',
+                            data:this.value1_1,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                // myChart.setOption(option);
+                charts.push(myChart);
+                window.onresize = function () {
+                    charts.map(i => {
+                        i.resize()
+                })
+                }
             },
             // 通车详情相关图表
             createMoreCharts(type) {
-                console.log(type,1)
-                if ( type ==1 ) {
+                // if ( type ==1 ) {
                     var charts1 = document.getElementById('container1-11');
                     var charts2 = document.getElementById('container1-12');
                     var charts3 = document.getElementById('container1-13');
                     var charts4 = document.getElementById('container1-14');
                     var charts = [];
-                    var myChart = echarts.init(charts1);
-                    option = {
+                    charts1.style.width = window.innerWidth+'px';
+                    charts2.style.width = window.innerWidth+'px';
+                    charts3.style.width = window.innerWidth+'px';
+                    charts4.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(charts1);
+                option = {
                         title: {
                             // show: true,
                             text: '还贷中心',
@@ -605,7 +959,7 @@
                     if (option && typeof option === "object") {
                         myChart.setOption(option, true);
                     }
-                    myChart.setOption(option);
+                    // myChart.setOption(option);
                     charts.push(myChart);
                     myChart = echarts.init(charts2);
                     option = {
@@ -769,7 +1123,7 @@
                     if (option && typeof option === "object") {
                         myChart.setOption(option, true);
                     }
-                    myChart.setOption(option);
+                    // myChart.setOption(option);
                     charts.push(myChart);
                     myChart = echarts.init(charts3);
                     option = {
@@ -1042,44 +1396,26 @@
                     }
                     myChart.setOption(option);
                     charts.push(myChart);
-                    window.onresize = function () {
-                        charts.map(i => {
-                            i.resize()
-                    })
-                    }
-                }
-                else if (type == 2) {
+                    // window.onresize = function () {
+                    //     charts.map(i => {
+                    //         i.resize()
+                    // })
+                    // }
+                // }
+                // else if (type == 2) {
                     var charts1_1 = document.getElementById('container1-21');
                     var charts2_1 = document.getElementById('container1-22');
-                    var charts_2 = [];
-                    var myChart_2 = echarts.init(charts1_1);
+                    // var charts_2 = [];
+                charts1_1.style.width = window.innerWidth+'px';
+                charts2_1.style.width = window.innerWidth+'px';
+                    myChart = echarts.init(charts1_1);
                     option = {
-                        title: {
-                            // show: true,
-                            text: '',
-                            top: 'top',
-                            left: 'center',
-                            textAlign: 'center',
-                            textStyle: {
-                                fontSize: 12,
-                                fontStyle: 'normal',
-                                fontWeight: 'bold',
-                                color: '#CDAD00',
-                            },
-
-                        },
                         // color: ['#1E90FF'],
                         backgroundColor: '#191970',
-                        tooltip : {
-                            trigger: 'axis',
-                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                            }
-                        },
                         grid: {
                             left: '3%',
                             right: '12%',
-                            bottom: '3%',
+                            bottom: '10%',
                             containLabel: true
                         },
                         xAxis : [
@@ -1102,14 +1438,17 @@
                                     },
                                 },
                                 axisLabel:{
-                                    color:'#fff'
+                                    color:'#fff',
+                                    fontSize: 12,
+                                    // interval:0,
+                                    rotate:"-15"
                                 },   // x轴字体颜色
                             }
                         ],
                         yAxis : [
                             {
                                 type : 'value',
-                                name: '亿元',
+                                name: 'km',
                                 splitLine: {
                                     "show": false
                                 },
@@ -1160,33 +1499,19 @@
                         ]
                     };
                     if (option && typeof option === "object") {
-                        myChart_2.setOption(option, true);
+                        myChart.setOption(option, true);
                     }
-                    myChart_2.setOption(option);
-                    charts_2.push(myChart_2);
-                    myChart_2 = echarts.init(charts2_1);
+                    myChart.setOption(option);
+                    charts.push(myChart);
+                    myChart = echarts.init(charts2_1);
                     option = {
-                        title: {
-                            // show: true,
-                            text: '',
-                            top: 'top',
-                            left: 'center',
-                            textAlign: 'center',
-                            textStyle: {
-                                fontSize: 12,
-                                fontStyle: 'normal',
-                                fontWeight: 'bold',
-                                color: '#CDAD00',
-                            },
-
-                        },
                         legend : { //图标
                             type: '',
                             top: '10%',
                             right: '5%',
                             show : true,
-                            itemGap : 10,
-                            itemWidth : 30,
+                            itemGap : 3,
+                            itemWidth : 40,
                             itemHeight : 10,
                             data : [
                                 {
@@ -1204,7 +1529,7 @@
                                     }
                                 },
                                 {
-                                    name: '累计投资（亿元）',
+                                    name: '累计投资（元）',
                                     icon: 'square',
                                     textStyle:{
                                         color: '#fff',
@@ -1212,19 +1537,11 @@
                                 }
                             ]
                         },
-
-                        // color: ['#1E90FF'],
                         backgroundColor: '#191970',
-                        tooltip : {
-                            trigger: 'axis',
-                            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                            }
-                        },
                         grid: {
                             left: '3%',
                             right: '12%',
-                            bottom: '3%',
+                            bottom: '10%',
                             containLabel: true
                         },
                         xAxis : [
@@ -1247,7 +1564,9 @@
                                     },
                                 },
                                 axisLabel:{
-                                    color:'#fff'
+                                    color:'#fff',
+                                    rotate:"-15"
+
                                 },   // x轴字体颜色
                             }
                         ],
@@ -1277,7 +1596,7 @@
                         ],
                         series : [
                             {
-                                name:'总投资（亿元)',
+                                name:'总投资（亿元）',
                                 type:'bar',
                                 barWidth: '20%',
                                 data:this.value12_21,
@@ -1359,17 +1678,17 @@
                         ]
                     };
                     if (option && typeof option === "object") {
-                        myChart_2.setOption(option, true);
+                        myChart.setOption(option, true);
                     }
-                    myChart_2.setOption(option);
-                    charts_2.push(myChart_2);
+                    myChart.setOption(option);
+                    charts.push(myChart);
                     window.onresize = function () {
-                        charts_2.map(i => {
+                        myChart.style.width = window.innerWidth+'px';
+                        charts.map(i => {
                             i.resize()
                     })
                     }
-                }
-
+                // }
             },
             createMoreBase (type) {
 
@@ -1386,12 +1705,15 @@
             turnTo (index) {
                 this.leftBox = false;
                 this.type = index;
+                console.log(index);
                 if (index*1 === 0) {
+                    this.selected1 = '1-1';
                     this.createCharts();
                     this.createMoreCharts(2);
 
                 }
                 if (index*1 === 1) {
+                    this.selected2 = '2-1';
                     this.createBase();
                     this.createMoreBase();
 

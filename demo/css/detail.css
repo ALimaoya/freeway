@@ -32,12 +32,13 @@ body{
 }
 .charts-wrap div{
     width: 100%;
-    height: 1.6rem!important;
+    height: 2rem!important;
     padding-bottom: 0.2rem;
 }
 .charts-wrap div div{
     width: 100% !important;
 }
+
 .icon-wrap{
     width: 100%;
     height: 0.4rem;
