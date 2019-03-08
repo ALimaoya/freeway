@@ -202,3 +202,62 @@ table thead tr{
 .funcList li p {
     font-size: 0.14rem;
 }
+.table2-wrap{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.tableItem{
+    background: #fefefe;
+}
+.table-title{
+    height: 0.5rem;
+    line-height: 0.5rem;
+    text-align: center;
+    font-size: 0.15rem;
+    font-weight: bold;
+    background: #fff;
+    border-bottom: 1px solid #dedede;
+}
+.table-name{
+    line-height: 0.5rem;
+    padding: 0 0.1rem;
+    box-sizing: border-box;
+    font-size: 0.14rem;
+    color: #666;
+    font-weight: bold;
+    border-bottom: 1px solid #dedede;
+}
+.table-content{
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.3rem;
+}
+.table-content span{
+    line-height: 0.4rem;
+    width: 100%;
+    font-size: 0.12rem;
+}
+.baseDetail{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 0.2rem  ;
+    /*background: #2f6fad;*/
+}
+.baseDetail li{
+    width: 50%;
+    margin-bottom: 0.1rem;
+}
+.baseDetail li div{
+    line-height: 0.2rem;
+    text-align: center;
+    font-size: 0.14rem;
+    color: #26a2ff;
+}
+.baseDetail li div span{
+    color: #4caf50;
+}
