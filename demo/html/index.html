@@ -25,7 +25,7 @@
         </mt-swipe>
         <ul class="page-wrap">
             <li v-for="(item,index) in pageItem" :key="index">
-                <a :href="'./detail.html?type='+ index">
+                <a :href="'./detail'+  index +'.html'">
                     <image class="icon" :src="item.icon"></image>
                     <span class="page-name">{{item.name}}</span>
                 </a>

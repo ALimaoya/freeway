@@ -15,7 +15,7 @@ body{
 .mt50{
     margin-top: 0.5rem;
 }
-#container1 {
+.mainCharts{
     height: 2.5rem !important;
     width: 100%;
 }

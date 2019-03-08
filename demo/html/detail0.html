@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>详情</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/mint-ui.css"/>
+    <link rel="stylesheet" href="../css/detail.css"/>
+    <script src="../js/rem.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="app">
+    <mt-header fixed :title="pageItem[type].name">
+        <router-link to="/" slot="left">
+            <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
+        </router-link>
+    </mt-header>
+        <mt-navbar v-model="selected1" class="mt50">
+            <mt-tab-item id="1-1">通车里程</mt-tab-item>
+            <mt-tab-item id="1-2">在建里程</mt-tab-item>
+        </mt-navbar>
+        <mt-tab-container v-model="selected1">
+            <mt-tab-container-item id="1-1">
+                <div id="container1" class="mainCharts"></div>
+                <!--<div class="icon-wrap">-->
+                <!--<image class="icon" :class="show?'rotation':(show=== false?'rotation2':'')" src="../images/warrior.png" @click="showCharts"></image>-->
+                <!--</div>-->
+                <div class="charts-wrap">
+                    <div id="container1-11"></div>
+                    <div id="container1-12"></div>
+                    <div id="container1-13"></div>
+                    <div id="container1-14"></div>
+                    <!--<div class="table-wrap" :class="show?'slideDown':(show===false?'slideUp':'')">-->
+                    <!--<ul class="search">-->
+                    <!--<li>-->
+                    <!--<label>管理单位：</label>-->
+                    <!--<select class="select" >-->
+                    <!--<option value="123">123</option>-->
+                    <!--</select>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<label>路线名称：</label>-->
+                    <!--<select class="select">-->
+                    <!--<option value="fff">fff</option>-->
+                    <!--</select>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                    <!--<label>路段：</label>-->
+                    <!--<select class="select" >-->
+                    <!--<option value="123">123</option>-->
+                    <!--</select>-->
+                    <!--</li>-->
+                    <!--</ul>-->
+                    <!--<table align="center">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                    <!--<th>序号</th>-->
+                    <!--<th>管理单位</th>-->
+                    <!--<th>路线名称</th>-->
+                    <!--<th>路段</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr v-for="(item,index) in dataList" :key="index">-->
+                    <!--<th>{{(index+1)*1}}</th>-->
+                    <!--<th>{{ item.comName }}</th>-->
+                    <!--<th>{{ item.routeName }}</th>-->
+                    <!--<th>{{ item.route }}</th>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                    <!--</table>-->
+                    <!--</div>-->
+                </div>
+
+            </mt-tab-container-item>
+            <mt-tab-container-item id="1-2">
+                <div class="charts-wrap">
+                    <div id="container1-21" ></div>
+                    <div id="container1-22" ></div>
+                    <!--<div class="table-wrap" >-->
+                    <!--<table align="center">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                    <!--<th>序号</th>-->
+                    <!--<th>管理单位</th>-->
+                    <!--<th>项目数量</th>-->
+                    <!--<th>在建里程</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr v-for="(item,index) in dataList" :key="index">-->
+                    <!--<th>{{(index+1)*1}}</th>-->
+                    <!--<th>{{ item.comName }}</th>-->
+                    <!--<th>{{ item.routeName }}</th>-->
+                    <!--<th>{{ item.route }}</th>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                    <!--</table>-->
+                    <!--</div>-->
+
+                </div>
+            </mt-tab-container-item>
+        </mt-tab-container>
+
+
+    <ul class="bottom">
+        <li>
+            <a href="./index.html">
+                <image src="../images/home.png"></image>
+                <span>主页</span>
+            </a>
+        </li>
+        <li>
+            <a href="#javascript:;">
+                <image src="../images/detail.png"></image>
+                <span>详情</span>
+            </a>
+        </li><li>
+        <a href="./mine.html">
+            <image src="../images/mine.png"></image>
+            <span>我的</span>
+        </a>
+    </li>
+    </ul>
+    <div class="leftBox" :class="leftBox?'slideRight':(leftBox===false?'slideLeft':'')">
+        <mt-header class="sub-header" fixed title="功能选择">
+            <router-link to="/" slot="left">
+                <mt-button class="back" @click="leftBox=false" ></mt-button>
+            </router-link>
+        </mt-header>
+        <ul class="funcList">
+            <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
+                <img  src="../images/function.png"/>
+                <p>{{item}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="../js/echarts.common.min.js" type="text/javascript"></script>
+</body>
+</html>
+<script src="../js/vue.min.js" type="text/javascript"></script>
+<script src="../js/mint-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            pageItem: [
+                {
+                    icon: '../images/table-icon.png',
+                    name: '年度通车里程',
+
+                },
+                {
+                    icon: '../images/pie-icon.png',
+                    name: '基础设施',
+
+                },
+                {
+                    icon: '../images/star.png',
+                    name: '技术状况评定'
+                },
+                {
+                    icon: '../images/food.png',
+                    name: '星级服务区'
+                },
+                {
+                    icon: '../images/floor.png',
+                    name: '交通流量'
+                },
+                {
+                    icon: '../images/installation.png',
+                    name: '重点监控设施'
+                },
+                {
+                    icon: '../images/car.png',
+                    name: '交通管制信息'
+                },
+                {
+                    icon: '../images/rmb.png',
+                    name: '收费站信息'
+                }
+
+            ],
+            type: 0,
+            selected1: '1-1',
+            selected2: '2-1',
+            show: '',
+            dataList: [
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                }
+            ],
+            leftBox: false,
+            funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
+                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+            date1: ['2014', '2015', '2016', '2017', '2018'],
+            value1: [5924.056, 6381.741, 6612.415, 6754.299, 6799.399],
+            value1_1: [1265.08,1546.13,1546.13,1546.13,1591.23],
+            value1_21: [554.12,730.75,730.75,872.63,872.63],
+            value1_22: [2539.74,2539.74,2681.30,2681.30,2681.30],
+            value1_31: [0,0,0,0,0],
+            value1_32: [255.42,255.42,255.42,255.42,255.42],
+            value1_4: [1309.71,1309.71,1398.81,1398.81,1398.81],
+            xAxis1: ['交投集团','还贷中心','省公路局及省建投','其他主体'],
+            value12_21: [227.4713,401.3746,25.8432,158.7682],
+            value12_22: [0,0,0,0],
+            value12_23: [0,0,0,0],
+
+
+
+        },
+        mounted() {
+           this.createCharts();
+           this.createMoreCharts();
+        },
+        watch:{
+
+        },
+        methods: {
+            // 年度通车详情
+            createCharts () {
+                var dom = document.getElementById("container1");
+                dom.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(dom);
+                var app = {};
+                option = null;
+                app.title = '坐标轴刻度与标签对齐';
+                option = {
+                    title: {
+                        // show: true,
+                        text: this.pageItem[this.type].name,
+                        top: 'top',
+                        left: 'center',
+                        // textAlign: 'center',
+                        textStyle: {
+                            fontSize: 16,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+
+                    },
+                    // color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            show: 'false',
+                            name: '年份',
+                            nameLocation: 'end',
+                            type : 'category',
+                            data : this.date1,
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+
+
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            name: 'km',
+                            nameLocation: 'end',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+                    ],
+                    series : [
+                        {
+                            name: '',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_1,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        ,false),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 14
+                                        },
+                                    }
+                                },
+                            }
+                        },
+
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+            },
+
+            // 通车详情相关图表
+            createMoreCharts(type) {
+                // if ( type ==1 ) {
+                var charts1 = document.getElementById('container1-11');
+                var charts2 = document.getElementById('container1-12');
+                var charts3 = document.getElementById('container1-13');
+                var charts4 = document.getElementById('container1-14');
+                var charts = [];
+                charts1.style.width = window.innerWidth+'px';
+                charts2.style.width = window.innerWidth+'px';
+                charts3.style.width = window.innerWidth+'px';
+                charts4.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(charts1);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '还贷中心',
+                        top: 'top',
+                        left: 'center',
+                        textAlign: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+
+                    },
+                    color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.date1,
+                            name: '年份',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'直接访问',
+                            type:'bar',
+                            barWidth: '30%',
+                            data:this.value1_1,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                // myChart.setOption(option);
+                charts.push(myChart);
+                myChart = echarts.init(charts2);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '交投集团',
+                        top: 'top',
+                        left: 'center',
+                        textAlign: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+
+                    },
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '5%',
+                        show : true,
+                        itemGap : 10,
+                        itemWidth : 30,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '交投集团（中原）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '交投集团（高新）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            }
+                        ]
+                    },
+                    // color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.date1,
+                            name: '年份',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name: '交投集团（中原）',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_21,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        ,false),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+                                    }
+                                },
+                            }
+                        },
+                        {
+                            name: '交投集团（高新）',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_22,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#188df0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#888df0'}
+                                        ]
+                                    ),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+
+                                    }
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                // myChart.setOption(option);
+                charts.push(myChart);
+                myChart = echarts.init(charts3);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '省公路局及省建投',
+                        top: 'top',
+                        left: 'center',
+                        textAlign: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+
+                    },
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '5%',
+                        show : true,
+                        itemGap : 10,
+                        itemWidth : 30,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '省公路局',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '省建投',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            }
+                        ]
+                    },
+                    backgroundColor: '#191970',
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            name: '年份',
+                            data : this.date1,
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                            splitLine: {
+                                "show": false
+                            },
+                        },
+                    ],
+                    series : [
+                        {
+                            name: '省公路局',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_31,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        ,false),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+                                    }
+                                },
+                            }
+                        },
+                        {
+                            name: '省建投',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_32,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#188df0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#888df0'}
+                                        ]
+                                    ),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+
+                                    }
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                myChart.setOption(option);
+                charts.push(myChart);
+                myChart = echarts.init(charts4);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '其他主体',
+                        top: 'top',
+                        left: 'center',
+                        x:'center',
+                        y: 'top',
+                        textAlign: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                        },
+
+                    },
+                    // color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    tooltip : {
+                        trigger: 'axis',
+                        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            name: '年份',
+                            data : this.date1,
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },   // x轴字体颜色
+
+
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                            splitLine: {
+                                "show": false
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name: '其他主体',
+                            type: 'bar',
+                            barWidth: '30%',
+                            data: this.value1_4,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        ,false),
+                                    label: {
+                                        show: true, //开启显示
+                                        position: 'top', //在上方显示
+                                        textStyle: { //数值样式
+                                            color: 'white',
+                                            fontSize: 10
+                                        },
+                                    }
+                                },
+                            }
+                        },
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                myChart.setOption(option);
+                charts.push(myChart);
+                // window.onresize = function () {
+                //     charts.map(i => {
+                //         i.resize()
+                // })
+                // }
+                // }
+                // else if (type == 2) {
+                var charts1_1 = document.getElementById('container1-21');
+                var charts2_1 = document.getElementById('container1-22');
+                // var charts_2 = [];
+                charts1_1.style.width = window.innerWidth+'px';
+                charts2_1.style.width = window.innerWidth+'px';
+                myChart = echarts.init(charts1_1);
+                option = {
+                    // color: ['#1E90FF'],
+                    backgroundColor: '#191970',
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '10%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.xAxis1,
+                            name: '单位',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff',
+                                fontSize: 12,
+                                // interval:0,
+                                rotate:"-15"
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            name: 'km',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'直接访问',
+                            type:'bar',
+                            barWidth: '20%',
+                            data:this.value12_21,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        }
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                myChart.setOption(option);
+                charts.push(myChart);
+                myChart = echarts.init(charts2_1);
+                option = {
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '5%',
+                        show : true,
+                        itemGap : 3,
+                        itemWidth : 40,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '总投资（亿元）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '年度投资（亿元）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '累计投资（元）',
+                                icon: 'square',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            }
+                        ]
+                    },
+                    backgroundColor: '#191970',
+                    grid: {
+                        left: '3%',
+                        right: '12%',
+                        bottom: '10%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.xAxis1,
+                            name: '单位',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff',
+                                rotate:"-15"
+
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            name: '亿元',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'总投资（亿元）',
+                            type:'bar',
+                            barWidth: '20%',
+                            data:this.value12_21,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#1afdf0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#188df0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        },
+                        {
+                            name:'年度投资（亿元）',
+                            type:'bar',
+                            barWidth: '20%',
+                            data:this.value12_22,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#653df0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#234df0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        },
+                        {
+                            name:'累计投资（元）',
+                            type:'bar',
+                            barWidth: '20%',
+                            data:this.value12_23,
+                            itemStyle: {
+                                normal: {
+                                    color: new echarts.graphic.LinearGradient(
+                                        0, 1, 0, 0,
+                                        [
+                                            {offset: 0, color: '#baf1f0'},
+                                            // {offset: 0.5, color: '#188df0'},
+                                            {offset: 1, color: '#88adf0'}
+                                        ]
+                                        , false),
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        }
+
+
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                myChart.setOption(option);
+                charts.push(myChart);
+                window.onresize = function () {
+                    myChart.style.width = window.innerWidth+'px';
+                    charts.map(i => {
+                        i.resize()
+                    })
+                }
+                // }
+            },
+
+            showCharts() {
+                if(this.show === '') {
+                    this.show = true;
+                }else {
+                    this.show = !this.show;
+
+                }
+            },
+            turnTo (index){
+                window.location.href = './detail'+ index + '.html'
+            }
+        }
+    })
+</script>
