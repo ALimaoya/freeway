@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>详情</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/mint-ui.css"/>
+    <link rel="stylesheet" href="../css/detail.css"/>
+    <script src="../js/rem.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="app">
+    <mt-header fixed :title="pageItem[type].name">
+        <router-link to="/" slot="left">
+            <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
+        </router-link>
+    </mt-header>
+    <ul class="table2-wrap mt50">
+        <div class="table-title">收费站详情</div>
+        <ul class="search">
+            <li>
+                <label>管理单位：</label>
+                <select class="select" >
+                    <option value="">全部</option>
+                    <option value="新郑管理处">新郑管理处</option>
+                    <option value="济洛中心">济洛中心</option>
+                    <option value="洛阳管理处">洛阳管理处</option>
+                    <option value="南阳管理处">南阳管理处</option>
+                    <option value="三门峡管理处">三门峡管理处</option>
+                    <option value="少洛中心">少洛中心</option>
+                    <option value="新济中心">新济中心</option>
+                    <option value="航空港管理处">航空港管理处</option>
+                </select>
+            </li>
+            <li>
+                <label>路线名称：</label>
+                <select class="select">
+                    <option value="">
+                        <!--<input/>-->
+                    </option>
+                </select>
+            </li>
+            <li>
+                <label>路段：</label>
+                <select class="select" >
+                    <option value="">
+                        <!--<input />-->
+                    </option>
+                </select>
+            </li>
+            <li>
+                <label>年份：</label>
+                <select class="select" >
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+
+                </select>
+            </li>
+        </ul>
+        <li class="tableItem" v-for="(item,index) in tableList" :key="index">
+            <div class="table-name" @click="toggle(index)">收费站名称：{{item.name}}</div>
+            <div class="table-content" v-show="showItem===index">
+                <span>路线名称：{{ item.routeName}}</span>
+                <span>路段：{{ item.route}}</span>
+                <span>管理单位：{{ item.company}}</span>
+                <span>中心桩号：{{item.centerStake}}</span>
+                <span>负责人：{{ item.charge}}</span>
+                <span>进站车辆数：{{ item.arrival}}</span>
+                <span>出站车辆数：{{ item.departure}}</span>
+            </div>
+        </li>
+    </ul>
+    <ul class="bottom">
+        <li>
+            <a href="./index.html">
+                <image src="../images/home.png"></image>
+                <span>主页</span>
+            </a>
+        </li>
+        <li>
+            <a href="#javascript:;">
+                <image src="../images/detail.png"></image>
+                <span>详情</span>
+            </a>
+        </li><li>
+        <a href="./mine.html">
+            <image src="../images/mine.png"></image>
+            <span>我的</span>
+        </a>
+    </li>
+    </ul>
+    <div class="leftBox" :class="leftBox?'slideRight':(leftBox===false?'slideLeft':'')">
+        <mt-header class="sub-header" fixed title="功能选择">
+            <router-link to="/" slot="left">
+                <mt-button class="back" @click="leftBox=false" ></mt-button>
+            </router-link>
+        </mt-header>
+        <ul class="funcList">
+            <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
+                <img  src="../images/function.png"/>
+                <p>{{item}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="../js/echarts.common.min.js" type="text/javascript"></script>
+</body>
+</html>
+<script src="../js/vue.min.js" type="text/javascript"></script>
+<script src="../js/mint-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            pageItem: [
+                {
+                    icon: '../images/table-icon.png',
+                    name: '年度通车里程',
+
+                },
+                {
+                    icon: '../images/pie-icon.png',
+                    name: '基础设施',
+
+                },
+                {
+                    icon: '../images/star.png',
+                    name: '技术状况评定'
+                },
+                {
+                    icon: '../images/food.png',
+                    name: '星级服务区'
+                },
+                {
+                    icon: '../images/floor.png',
+                    name: '交通流量'
+                },
+                {
+                    icon: '../images/installation.png',
+                    name: '重点监控设施'
+                },
+                {
+                    icon: '../images/car.png',
+                    name: '交通管制信息'
+                },
+                {
+                    icon: '../images/rmb.png',
+                    name: '收费站信息'
+                }
+
+            ],
+            type: 7,
+            show: '',
+            dataList: [
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                }
+            ],
+            tableList: [
+                {
+                    name: '机场',
+                    routeName:'机场高速',
+                    route:'',
+                    company:'中原航空港分公司',
+                    centerStake: 25.000,
+                    charge: '',
+                    arrival: 28477,
+                    departure: 25886,
+                },
+                {
+                    name: '圃田收费站',
+                    routeName:'京港澳高速',
+                    route:'新乡至郑州段',
+                    company:'新郑管理处',
+                    centerStake: 665.973,
+                    charge: '陈守立',
+                    arrival: 28477,
+                    departure: 25886,
+                },
+                {
+                    name: '十八里河收费站',
+                    routeName:'郑州西南绕城高速',
+                    route:'',
+                    company:'新郑管理处',
+                    centerStake: 38.000,
+                    charge: '万山',
+                    arrival: 14178,
+                    departure: 14665,
+                },
+                {
+                    name: '新乡收费站',
+                    routeName:'京港澳高速',
+                    route:'新乡至郑州段',
+                    company:'新郑管理处',
+                    centerStake: 601.973,
+                    charge: '郭伟',
+                    arrival: 9545,
+                    departure: 9792,
+                },
+                {
+                    name: '樱桃沟收费站',
+                    routeName:'郑州西南绕城高速',
+                    route:'',
+                    company:'新郑管理处',
+                    centerStake: 26.000,
+                    charge: '冯新',
+                    arrival: 6514,
+                    departure: 7779,
+                },
+                {
+                    name: '豫龙收费站',
+                    routeName:'郑州西南绕城高速',
+                    route:'',
+                    company:'新郑管理处',
+                    centerStake: 10.440,
+                    charge: '费垠翔',
+                    arrival: 9694,
+                    departure: 10422,
+                },
+                {
+                    name: '原阳收费站',
+                    routeName:'京港澳高速',
+                    route:'新乡至郑州段',
+                    company:'新郑管理处',
+                    centerStake: 627.973,
+                    charge: '支玲',
+                    arrival: 6053,
+                    departure: 6554,
+                },
+
+            ],
+            showItem: '',
+            leftBox: false,
+            funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
+                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+        },
+        mounted() {
+
+        },
+        watch:{
+
+        },
+        methods: {
+            turnTo (index){
+                window.location.href = './detail'+ index + '.html'
+            },
+            toggle(index) {
+                if (this.showItem === index) {
+                    this.showItem = '';
+                }
+                else {
+                    this.showItem = index;
+                }
+            }
+        }
+    })
+</script>

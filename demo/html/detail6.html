@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>详情</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/mint-ui.css"/>
+    <link rel="stylesheet" href="../css/detail.css"/>
+    <script src="../js/rem.js" type="text/javascript"></script>
+
+</head>
+<body>
+<div id="app">
+    <mt-header fixed :title="pageItem[type].name">
+        <router-link to="/" slot="left">
+            <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
+        </router-link>
+    </mt-header>
+            <ul class="table2-wrap mt50">
+                <div class="table-title">交通管制断行路段详情</div>
+                <li class="tableItem" v-for="(item,index) in tableList" :key="index">
+                    <div class="table-name" @click="toggle(index)">路线：{{item.name}}</div>
+                    <div class="table-content" v-show="showItem===index">
+                        <span>路段：{{ item.route}}</span>
+                        <span>方向：{{ item.direction}}</span>
+                        <span>位置：{{ item.position}}</span>
+                        <span>管制原因：{{ item.reason}}</span>
+                        <span>管制开始时间：{{item.startTime}}</span>
+                        <span>管制结束时间：{{ item.endTime}}</span>
+
+                    </div>
+                </li>
+            </ul>
+    <ul class="bottom">
+        <li>
+            <a href="./index.html">
+                <image src="../images/home.png"></image>
+                <span>主页</span>
+            </a>
+        </li>
+        <li>
+            <a href="#javascript:;">
+                <image src="../images/detail.png"></image>
+                <span>详情</span>
+            </a>
+        </li><li>
+        <a href="./mine.html">
+            <image src="../images/mine.png"></image>
+            <span>我的</span>
+        </a>
+    </li>
+    </ul>
+    <div class="leftBox" :class="leftBox?'slideRight':(leftBox===false?'slideLeft':'')">
+        <mt-header class="sub-header" fixed title="功能选择">
+            <router-link to="/" slot="left">
+                <mt-button class="back" @click="leftBox=false" ></mt-button>
+            </router-link>
+        </mt-header>
+        <ul class="funcList">
+            <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
+                <img  src="../images/function.png"/>
+                <p>{{item}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="../js/echarts.common.min.js" type="text/javascript"></script>
+</body>
+</html>
+<script src="../js/vue.min.js" type="text/javascript"></script>
+<script src="../js/mint-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            pageItem: [
+                {
+                    icon: '../images/table-icon.png',
+                    name: '年度通车里程',
+
+                },
+                {
+                    icon: '../images/pie-icon.png',
+                    name: '基础设施',
+
+                },
+                {
+                    icon: '../images/star.png',
+                    name: '技术状况评定'
+                },
+                {
+                    icon: '../images/food.png',
+                    name: '星级服务区'
+                },
+                {
+                    icon: '../images/floor.png',
+                    name: '交通流量'
+                },
+                {
+                    icon: '../images/installation.png',
+                    name: '重点监控设施'
+                },
+                {
+                    icon: '../images/car.png',
+                    name: '交通管制信息'
+                },
+                {
+                    icon: '../images/rmb.png',
+                    name: '收费站信息'
+                }
+
+            ],
+            type: 6,
+            show: '',
+            dataList: [
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                },
+                {
+                    comName: '新郑管理处',
+                    routeName: '高速',
+                    route: '原阳至新庄段'
+                }
+            ],
+            tableList: [
+                {
+                    name: '连霍高速',
+                    route:'兰考段',
+                    direction:'上行',
+                    position:'k439+030~k482+100',
+                    reason: '施工',
+                    startTime: '2018-07-13',
+                    endTime: '2019-04-30'
+                },
+                {
+                    name: '连霍高速',
+                    route:'商丘段',
+                    direction:'上行',
+                    position:'k362+700',
+                    reason: '施工',
+                    startTime: '2018-06-14',
+                    endTime: ''
+                },
+                {
+                    name: '洛栾高速',
+                    route:'九龙山-栾川',
+                    direction:'双向',
+                    position:'',
+                    reason: '道路湿滑',
+                    startTime: '',
+                    endTime: ''
+                },
+
+
+            ],
+            showItem: '',
+            leftBox: false,
+            funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
+                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+        },
+        mounted() {
+
+        },
+        watch:{
+
+        },
+        methods: {
+            turnTo (index){
+                window.location.href = './detail'+ index + '.html'
+            },
+            toggle(index) {
+                if (this.showItem === index) {
+                    this.showItem = '';
+                }
+                else {
+                    this.showItem = index;
+                }
+            }
+        }
+    })
+</script>
