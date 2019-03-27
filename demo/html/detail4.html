@@ -21,7 +21,10 @@
             <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
         </router-link>
     </mt-header>
-    <ul class="table2-wrap mt50">
+    <div class="charts-wrap mt50" style="margin-bottom: 0;">
+        <div id="container" ></div>
+    </div>
+    <ul class="table2-wrap">
         <div class="table-title">交通流量分析详情</div>
         <ul class="search">
             <li>
@@ -160,6 +163,8 @@
             ],
             type: 4,
             show: '',
+            xLabel: [],
+            value1: [[16.9,45057],[17.3,44000],[17.75,99897],[17.88,48479],[18.73,54801],[19.1,52485],[20.06,109357],[20.4,101061],[23.45,101693]],
             dataList: [
                 {
                     comName: '新郑管理处',
@@ -292,12 +297,136 @@
                 '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
         },
         mounted() {
-
+            this.createCharts();
         },
         watch:{
 
         },
         methods: {
+            createCharts () {
+                var charts1 = document.getElementById('container');
+                charts1.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(charts1);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '观测站交通流量',
+                        top: 'top',
+                        left: 'center',
+                        textStyle: {
+                            fontSize: 12,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                            textAlign: 'center',
+
+                        },
+
+                    },
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '15%',
+                        show : true,
+                        itemGap : 2,
+                        itemWidth : 20,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '2017',
+                                icon: '',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                        ]
+                    },
+                    backgroundColor: '#191970',
+                    grid: {
+                        left: '3%',
+                        right: '20%',
+                        bottom: '5%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.xAxis1,
+                            name: '货车比例',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff',
+
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            name: '当量交通量（辆/天）',
+                            type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'2017',
+                            type:'scatter',
+                            data:this.value1,
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgb(231,233,45)'
+                                }
+                            },
+                            label: {
+                                show: true, //开启显示
+                                position: 'top', //在上方显示
+                                textStyle: { //数值样式
+                                    color: 'white',
+                                    fontSize: 10
+                                },
+                            }
+                        },
+
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                window.onresize = function () {
+                    charts1.resize()
+
+                }
+            },
             turnTo (index){
                 window.location.href = './detail'+ index + '.html'
             },

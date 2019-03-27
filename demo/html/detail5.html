@@ -2,9 +2,284 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>详情</title>
+    <link rel="stylesheet" href="../css/global.css"/>
+    <link rel="stylesheet" href="../css/mint-ui.css"/>
+    <link rel="stylesheet" href="../css/detail.css"/>
+    <script src="../js/rem.js" type="text/javascript"></script>
+
 </head>
 <body>
-
+<div id="app">
+    <mt-header fixed :title="pageItem[type].name">
+        <router-link to="/" slot="left">
+            <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
+        </router-link>
+    </mt-header>
+    <div class="charts-wrap mt50">
+        <div id="container" ></div>
+    </div>
+    <ul class="bottom">
+        <li>
+            <a href="./index.html">
+                <image src="../images/home.png"></image>
+                <span>主页</span>
+            </a>
+        </li>
+        <li>
+            <a href="#javascript:;">
+                <image src="../images/detail.png"></image>
+                <span>详情</span>
+            </a>
+        </li><li>
+        <a href="./mine.html">
+            <image src="../images/mine.png"></image>
+            <span>我的</span>
+        </a>
+    </li>
+    </ul>
+    <div class="leftBox" :class="leftBox?'slideRight':(leftBox===false?'slideLeft':'')">
+        <mt-header class="sub-header" fixed title="功能选择">
+            <router-link to="/" slot="left">
+                <mt-button class="back" @click="leftBox=false" ></mt-button>
+            </router-link>
+        </mt-header>
+        <ul class="funcList">
+            <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
+                <img  src="../images/function.png"/>
+                <p>{{item}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="../js/echarts.common.min.js" type="text/javascript"></script>
 </body>
 </html>
+<script src="../js/vue.min.js" type="text/javascript"></script>
+<script src="../js/mint-ui.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            pageItem: [
+                {
+                    icon: '../images/table-icon.png',
+                    name: '年度通车里程',
+
+                },
+                {
+                    icon: '../images/pie-icon.png',
+                    name: '基础设施',
+
+                },
+                {
+                    icon: '../images/star.png',
+                    name: '技术状况评定'
+                },
+                {
+                    icon: '../images/food.png',
+                    name: '星级服务区'
+                },
+                {
+                    icon: '../images/floor.png',
+                    name: '交通流量'
+                },
+                {
+                    icon: '../images/installation.png',
+                    name: '重点监控设施'
+                },
+                {
+                    icon: '../images/car.png',
+                    name: '交通管制信息'
+                },
+                {
+                    icon: '../images/rmb.png',
+                    name: '收费站信息'
+                }
+
+            ],
+            type: 5,
+            show: '',
+            leftBox: false,
+            funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
+                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+            xAxis1: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+            value1: [660,638,573,0,0,0,0,0,0,0,0,0],
+            value2: [676,638,612,0,0,0,0,0,0,0,0,0],
+            value3: [0,0,0,0,0,0,0,0,0,0,0,0],
+            value4: [0,0,0,0,0,0,0,0,0,0,0,0],
+
+        },
+        mounted() {
+            this.createNowCharts();
+        },
+        methods: {
+            createNowCharts () {
+                var charts1 = document.getElementById('container');
+                charts1.style.width = window.innerWidth+'px';
+                var myChart = echarts.init(charts1);
+                option = {
+                    title: {
+                        // show: true,
+                        text: '重点监控设施状态',
+                        top: 'top',
+                        left: 'center',
+                        textStyle: {
+                            fontSize: 14,
+                            fontStyle: 'normal',
+                            fontWeight: 'bold',
+                            color: '#CDAD00',
+                            textAlign: 'center',
+
+                        },
+                    },
+                    legend : { //图标
+                        type: '',
+                        top: '10%',
+                        right: '5%',
+                        show : true,
+                        itemGap : 2,
+                        itemWidth : 20,
+                        itemHeight : 10,
+                        data : [
+                            {
+                                name: '点位1',
+                                icon: '',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '点位2',
+                                icon: '',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '点位3',
+                                icon: '',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+                            {
+                                name: '点位4',
+                                icon: '',
+                                textStyle:{
+                                    color: '#fff',
+                                }
+                            },
+
+                        ]
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        position: ['45%','100%'],
+                        extraCssText: 'width: 100px;height: 100px'
+                    },
+                        backgroundColor: '#191970',
+                    grid: {
+                        left: '3%',
+                        right: '5%',
+                        bottom: '7%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : this.xAxis1,
+                            name: '',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff',
+
+                            },   // x轴字体颜色
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            name: '告警数（次）',
+                            type : 'value',
+                            splitLine: {
+                                "show": false
+                            },
+                            axisTick: {
+                                alignWithLabel: true,
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLine: {
+                                lineStyle:{
+                                    color:'#fff'
+                                },
+                            },
+                            axisLabel:{
+                                color:'#fff'
+                            },
+                        },
+
+                    ],
+                    series : [
+                        {
+                            name:'点位1',
+                            type:'line',
+                            data:this.value1,
+                           symbolSize: 8,
+                        },
+                        {
+                            name:'点位2',
+                            type:'line',
+                            data:this.value2,
+                            symbolSize: 8,
+                        },
+                        {
+                            name:'点位3',
+                            type:'line',
+                            data:this.value3,
+                            symbolSize: 8,
+                        },
+                        {
+                            name:'点位4',
+                            type:'line',
+                            data:this.value4,
+                            symbolSize: 8,
+
+                        }
+
+                    ]
+                };
+                if (option && typeof option === "object") {
+                    myChart.setOption(option, true);
+                }
+                window.onresize = function () {
+                    charts1.resize()
+                }
+            },
+
+            // 跳转到对应详情
+            turnTo (index) {
+                window.location.href = './detail'+ index + '.html'
+            }
+        }
+    })
+</script>

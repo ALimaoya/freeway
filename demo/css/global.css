@@ -9,7 +9,7 @@ i,em{font-style:normal;}
 html{
     font-size: 100px!important;
 }
-html,body,#app,#detail{
+html,#detail{
     height: 100%;
 
 }
