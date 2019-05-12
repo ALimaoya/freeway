@@ -93,10 +93,14 @@
 </html>
 <script src="../js/vue.min.js" type="text/javascript"></script>
 <script src="../js/mint-ui.js" type="text/javascript"></script>
+<script src="../js/back.js" type="text/javascript"></script>
+<script src="../js/axios.min.js" type="text/javascript"></script>
+<script src="../js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         data: {
+            baseUrl: baseUrl,
             pageItem: [
                 {
                     icon: '../images/table-icon.png',
@@ -166,34 +170,49 @@
             ],
             leftBox: false,
             funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+                '重点监控设施状态','交通管制信息','收费站年度信息'],
+            dataObj1:{},
+            dataObj2:{},
+            dataObj3:{},
             xAxis1: ['优','良','中','次','差'],
-            value1_11: [1043,9,93,0,21],
-            value1_12: [3855,453,281,6,60],
-            value1_2: [2877,53,215,0,66],
-            value1_31: [0,0,0,0,0],
-            value1_32: [434,64,1,0,3],
-            value1_4: [1885,408,346,5,22],
             xAxis2: ['1类','2类','3类','4类','5类'],
-            value2_11:[629,815,107,0,1],
-            value2_12: [4749,1037,14,21,19],
-            value2_2: [1823,1526,37,61,21],
-            value2_31: [0,0,0,0,0],
-            value2_32: [192,430,31,0,0],
-            value2_4: [1471,1377,30,2,0],
-            xAxis3: ['1类','2类','3类','4类','5类'],
-            value3_11:[0,0,0,0,0],
-            value3_12: [0,0,0,0,0],
-            value3_2: [0,1,0,0,0],
-            value3_31: [0,0,0,0,0],
-            value3_32: [0,0,0,0,0],
-            value3_4: [0,0,0,0,0],
 
         },
         mounted() {
-            this.createNowCharts();
+            this.getData();
         },
         methods: {
+            getData () {
+                var _this = this ;
+                axios.get(this.baseUrl + '/skill/road/count').then(function(res) {
+                    if (res.data.status === '000000') {
+                        _this.dataObj1 = res.data.data;
+
+                    } else {
+                        MessageBox('提示', res.data.message);
+                    }
+                }).then(function (){
+                    axios.get(this.baseUrl + '/skill/bridge/count').then(function(res) {
+                        if (res.data.status === '000000') {
+                            _this.dataObj2 = res.data.data;
+
+                        } else {
+                            MessageBox('提示', res.data.message);
+                        }
+                    });
+
+                }).then(function () {
+                    axios.get(this.baseUrl + '/skill/tunnel/count').then(function(res) {
+                        if (res.data.status === '000000') {
+                            _this.dataObj3 = res.data.data;
+                            _this.createNowCharts();
+                        } else {
+                            MessageBox('提示', res.data.message);
+                        }
+                    });
+
+                });
+            },
             createNowCharts () {
                 var charts1 = document.getElementById('container2-11');
                 var charts2 = document.getElementById('container2-12');
@@ -323,7 +342,8 @@
                             name:'交投集团（中原）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_11,
+                            data:[this.dataObj1.zhongYuan.you,this.dataObj1.zhongYuan.liang,this.dataObj1.zhongYuan.zhong,
+                                this.dataObj1.zhongYuan.ci,this.dataObj1.zhongYuan.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -349,7 +369,8 @@
                             name:'交投集团（高发）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_12,
+                            data:[this.dataObj1.gaoFa.you,this.dataObj1.gaoFa.liang,this.dataObj1.gaoFa.zhong,
+                                this.dataObj1.gaoFa.ci,this.dataObj1.gaoFa.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -456,7 +477,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_2,
+                            data:[this.dataObj1.huanDai.you,this.dataObj1.huanDai.liang,this.dataObj1.huanDai.zhong,
+                                this.dataObj1.huanDai.ci,this.dataObj1.huanDai.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -587,7 +609,8 @@
                             name:'省公路局',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_31,
+                            data:[this.dataObj1.shengGongLu.you,this.dataObj1.shengGongLu.liang,this.dataObj1.shengGongLu.zhong,
+                                this.dataObj1.shengGongLu.ci,this.dataObj1.shengGongLu.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -613,7 +636,8 @@
                             name:'省建投',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_32,
+                            data:[this.dataObj1.shengJiantou.you,this.dataObj1.shengJiantou.liang,this.dataObj1.shengJiantou.zhong,
+                                this.dataObj1.shengJiantou.ci,this.dataObj1.shengJiantou.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -721,7 +745,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_4,
+                            data:[this.dataObj1.qiTa.you,this.dataObj1.qiTa.liang,this.dataObj1.qiTa.zhong,
+                                this.dataObj1.qiTa.ci,this.dataObj1.qiTa.cha],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -852,7 +877,8 @@
                             name:'交投集团（中原）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value2_11,
+                            data:[this.dataObj2.zhongYuan.one,this.dataObj2.zhongYuan.two,this.dataObj2.zhongYuan.three,
+                                this.dataObj2.zhongYuan.four,this.dataObj2.zhongYuan.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -878,7 +904,8 @@
                             name:'交投集团（高发）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value2_12,
+                            data:[this.dataObj2.gaoFa.one,this.dataObj2.gaoFa.two,this.dataObj2.gaoFa.three,
+                                this.dataObj2.gaoFa.four,this.dataObj2.gaoFa.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -984,7 +1011,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value2_2,
+                            data:[this.dataObj2.huanDai.one,this.dataObj2.huanDai.two,this.dataObj2.huanDai.three,
+                                this.dataObj2.huanDai.four,this.dataObj2.huanDai.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1115,7 +1143,8 @@
                             name:'省公路局',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value2_31,
+                            data:[this.dataObj2.shengGongLu.one,this.dataObj2.shengGongLu.two,this.dataObj2.shengGongLu.three,
+                                this.dataObj2.shengGongLu.four,this.dataObj2.shengGongLu.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1141,7 +1170,8 @@
                             name:'省建投',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value1_32,
+                            data:[this.dataObj2.shengJiantou.one,this.dataObj2.shengJiantou.two,this.dataObj2.shengJiantou.three,
+                                this.dataObj2.shengJiantou.four,this.dataObj2.shengJiantou.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1249,7 +1279,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value2_4,
+                            data:[this.dataObj2.qiTa.one,this.dataObj2.qiTa.two,this.dataObj2.qiTa.three,
+                                this.dataObj2.qiTa.four,this.dataObj2.qiTa.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1330,7 +1361,7 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : this.xAxis3,
+                            data : this.xAxis2,
                             name: '技术状况',
                             splitLine: {
                                 "show": false
@@ -1380,7 +1411,8 @@
                             name:'交投集团（中原）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_11,
+                            data:[this.dataObj3.zhongYuan.one,this.dataObj3.zhongYuan.two,this.dataObj3.zhongYuan.three,
+                                this.dataObj3.zhongYuan.four,this.dataObj3.zhongYuan.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1406,7 +1438,8 @@
                             name:'交投集团（高发）',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_12,
+                            data:[this.dataObj3.gaoFa.one,this.dataObj3.gaoFa.two,this.dataObj3.gaoFa.three,
+                                this.dataObj3.gaoFa.four,this.dataObj3.gaoFa.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1447,7 +1480,6 @@
                             fontWeight: 'bold',
                             color: '#CDAD00',
                             textAlign: 'center',
-
                         },
                     },
                     backgroundColor: '#191970',
@@ -1460,7 +1492,7 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : this.xAxis3,
+                            data : this.xAxis2,
                             name: '技术状况',
                             splitLine: {
                                 "show": false
@@ -1512,7 +1544,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_2,
+                            data:[this.dataObj3.huanDai.one,this.dataObj3.huanDai.two,this.dataObj3.huanDai.three,
+                                this.dataObj3.huanDai.four,this.dataObj3.huanDai.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1593,7 +1626,7 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : this.xAxis3,
+                            data : this.xAxis2,
                             name: '技术状况',
                             splitLine: {
                                 "show": false
@@ -1643,7 +1676,8 @@
                             name:'省公路局',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_31,
+                            data:[this.dataObj3.shengGongLu.one,this.dataObj3.shengGongLu.two,this.dataObj3.shengGongLu.three,
+                                this.dataObj3.shengGongLu.four,this.dataObj3.shengGongLu.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1669,7 +1703,8 @@
                             name:'省建投',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_32,
+                            data:[this.dataObj3.shengJiantou.one,this.dataObj3.shengJiantou.two,this.dataObj3.shengJiantou.three,
+                                this.dataObj3.shengJiantou.four,this.dataObj3.shengJiantou.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1725,7 +1760,7 @@
                     xAxis : [
                         {
                             type : 'category',
-                            data : this.xAxis3,
+                            data : this.xAxis2,
                             name: '技术状况',
                             splitLine: {
                                 "show": false
@@ -1777,7 +1812,8 @@
                             name:'直接访问',
                             type:'bar',
                             barWidth: '20%',
-                            data:this.value3_4,
+                            data:[this.dataObj3.qiTa.one,this.dataObj3.qiTa.two,this.dataObj3.qiTa.three,
+                                this.dataObj3.qiTa.four,this.dataObj3.qiTa.five],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(

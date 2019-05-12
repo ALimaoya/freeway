@@ -21,61 +21,46 @@
             <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
         </router-link>
     </mt-header>
-    <ul class="table2-wrap mt50">
+    <div class="table2-wrap mt50">
         <div class="table-title">收费站详情</div>
         <ul class="search">
             <li>
                 <label>管理单位：</label>
-                <select class="select" >
-                    <option value="">全部</option>
-                    <option value="新郑管理处">新郑管理处</option>
-                    <option value="济洛中心">济洛中心</option>
-                    <option value="洛阳管理处">洛阳管理处</option>
-                    <option value="南阳管理处">南阳管理处</option>
-                    <option value="三门峡管理处">三门峡管理处</option>
-                    <option value="少洛中心">少洛中心</option>
-                    <option value="新济中心">新济中心</option>
-                    <option value="航空港管理处">航空港管理处</option>
-                </select>
+                <input @blur="handleSearch" v-model="searchData.management" />
+
             </li>
             <li>
                 <label>路线名称：</label>
-                <select class="select">
-                    <option value="">
-                        <!--<input/>-->
-                    </option>
-                </select>
+                <input @blur="handleSearch" v-model="searchData.roadName"/>
             </li>
             <li>
                 <label>路段：</label>
-                <select class="select" >
-                    <option value="">
-                        <!--<input />-->
-                    </option>
-                </select>
+                <input @blur="handleSearch" v-model="searchData.segment"/>
             </li>
             <li>
-                <label>年份：</label>
-                <select class="select" >
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-
-                </select>
+                <label>收费站名称：</label>
+                <input  @blur="handleSearch" v-model="searchData.name"/>
             </li>
         </ul>
-        <li class="tableItem" v-for="(item,index) in tableList" :key="index">
-            <div class="table-name" @click="toggle(index)">收费站名称：{{item.name}}</div>
-            <div class="table-content" v-show="showItem===index">
-                <span>路线名称：{{ item.routeName}}</span>
-                <span>路段：{{ item.route}}</span>
-                <span>管理单位：{{ item.company}}</span>
-                <span>中心桩号：{{item.centerStake}}</span>
-                <span>负责人：{{ item.charge}}</span>
-                <span>进站车辆数：{{ item.arrival}}</span>
-                <span>出站车辆数：{{ item.departure}}</span>
-            </div>
-        </li>
-    </ul>
+        <div  style="margin-bottom: 0.5rem;overflow: scroll">
+            <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+                <ul>
+                    <li class="tableItem" v-for="(item,index) in tableList" :key="index">
+                        <div class="table-name" @click="toggle(index)">收费站名称：{{item.name}}</div>
+                        <div class="table-content" v-show="showItem===index">
+                            <span>路线名称：{{ item.roadName}}</span>
+                            <span>路段：{{ item.segment}}</span>
+                            <span>管理单位：{{ item.management}}</span>
+                            <span>中心桩号：{{item.centreStake}}</span>
+                            <span>负责人：{{ item.principal}}</span>
+                            <span>进站车辆数：{{ item.traffic}}</span>
+                            <span>出站车辆数：{{ item.charge}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </mt-loadmore>
+        </div>
+    </div>
     <ul class="bottom">
         <li>
             <a href="./index.html">
@@ -101,12 +86,14 @@
                 <mt-button class="back" @click="leftBox=false" ></mt-button>
             </router-link>
         </mt-header>
+        <mt-loadmore>
         <ul class="funcList">
             <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
                 <img  src="../images/function.png"/>
                 <p>{{item}}</p>
             </li>
         </ul>
+        </mt-loadmore>
     </div>
 </div>
 <script src="../js/echarts.common.min.js" type="text/javascript"></script>
@@ -114,10 +101,14 @@
 </html>
 <script src="../js/vue.min.js" type="text/javascript"></script>
 <script src="../js/mint-ui.js" type="text/javascript"></script>
+<script src="../js/back.js" type="text/javascript"></script>
+<script src="../js/axios.min.js" type="text/javascript"></script>
+<script src="../js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         data: {
+            baseUrl: baseUrl,
             pageItem: [
                 {
                     icon: '../images/table-icon.png',
@@ -157,118 +148,53 @@
             ],
             type: 7,
             show: '',
-            dataList: [
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                }
-            ],
-            tableList: [
-                {
-                    name: '机场',
-                    routeName:'机场高速',
-                    route:'',
-                    company:'中原航空港分公司',
-                    centerStake: 25.000,
-                    charge: '',
-                    arrival: 28477,
-                    departure: 25886,
-                },
-                {
-                    name: '圃田收费站',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州段',
-                    company:'新郑管理处',
-                    centerStake: 665.973,
-                    charge: '陈守立',
-                    arrival: 28477,
-                    departure: 25886,
-                },
-                {
-                    name: '十八里河收费站',
-                    routeName:'郑州西南绕城高速',
-                    route:'',
-                    company:'新郑管理处',
-                    centerStake: 38.000,
-                    charge: '万山',
-                    arrival: 14178,
-                    departure: 14665,
-                },
-                {
-                    name: '新乡收费站',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州段',
-                    company:'新郑管理处',
-                    centerStake: 601.973,
-                    charge: '郭伟',
-                    arrival: 9545,
-                    departure: 9792,
-                },
-                {
-                    name: '樱桃沟收费站',
-                    routeName:'郑州西南绕城高速',
-                    route:'',
-                    company:'新郑管理处',
-                    centerStake: 26.000,
-                    charge: '冯新',
-                    arrival: 6514,
-                    departure: 7779,
-                },
-                {
-                    name: '豫龙收费站',
-                    routeName:'郑州西南绕城高速',
-                    route:'',
-                    company:'新郑管理处',
-                    centerStake: 10.440,
-                    charge: '费垠翔',
-                    arrival: 9694,
-                    departure: 10422,
-                },
-                {
-                    name: '原阳收费站',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州段',
-                    company:'新郑管理处',
-                    centerStake: 627.973,
-                    charge: '支玲',
-                    arrival: 6053,
-                    departure: 6554,
-                },
-
-            ],
+            searchData:{
+                management: '',
+                roadName: '',
+                segment: '',
+                name: '',
+                pageNum: 1,
+            },
+            allLoaded: false,
+            tableList: [],
             showItem: '',
             leftBox: false,
             funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+                '重点监控设施状态','交通管制信息','收费站年度信息'],
         },
         mounted() {
-
-        },
-        watch:{
-
+            this.getData();
         },
         methods: {
+            getData () {
+                var _this = this ;
+                axios.post(this.baseUrl + 'tollStation/list',this.searchData).then(function(res) {
+                    if (res.data.status === '000000') {
+                        if(res.data.data.length) {
+                            if (_this.pageNum == 1) {
+                                _this.tableList = res.data.data;
+                            } else {
+                                res.data.data.map( function (i) {
+                                    _this.tableList.push(i) ;
+                                })
+                            }
+                            _this.pageNum ++ ;
+                        }
+                    } else {
+                        MessageBox('提示', res.data.message);
+                    }
+                })
+            },
+            handleSearch () {
+              this.searchData.pageNum = 1;
+              this.tableList = [];
+              this.getData();
+            },
+            loadBottom() {
+                this.$refs.loadmore.onBottomLoaded();
+                // this.allLoaded = true;
+                this.getData();
+            },
             turnTo (index){
                 window.location.href = './detail'+ index + '.html'
             },

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../css/mint-ui.css"/>
     <link rel="stylesheet" href="../css/detail.css"/>
     <script src="../js/rem.js" type="text/javascript"></script>
-
 </head>
 <body>
 <div id="app">
@@ -29,59 +28,44 @@
         <ul class="search">
             <li>
                 <label>管理单位：</label>
-                <select class="select" >
-                    <option value="">全部</option>
-                    <option value="新郑管理处">新郑管理处</option>
-                    <option value="济洛中心">济洛中心</option>
-                    <option value="洛阳管理处">洛阳管理处</option>
-                    <option value="南阳管理处">南阳管理处</option>
-                    <option value="三门峡管理处">三门峡管理处</option>
-                    <option value="少洛中心">少洛中心</option>
-                    <option value="新济中心">新济中心</option>
-                    <option value="航空港管理处">航空港管理处</option>
-                </select>
+                <input @blur="handleSearch" placeholder="" v-model="management"/>
             </li>
             <li>
                 <label>路线名称：</label>
-                <select class="select">
-                    <option value="">
-                        <!--<input/>-->
-                    </option>
-                </select>
+                <input  @blur="handleSearch" placeholder="" v-model="segment"/>
             </li>
             <li>
                 <label>路段：</label>
-                <select class="select" >
-                    <option value="">
-                        <!--<input />-->
-                    </option>
-                </select>
+                <input  @blur="handleSearch" placeholder="" v-model="roadName"/>
             </li>
             <li>
                 <label>年份：</label>
-                <select class="select" >
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-
-                </select>
+                <input  @blur="handleSearch" placeholder="" v-model="year"/>
             </li>
         </ul>
-        <li class="tableItem" v-for="(item,index) in tableList" :key="index">
-            <div class="table-name" @click="toggle(index)">观测站名称：{{item.name}}</div>
-            <div class="table-content" v-show="showItem===index">
-                <span>管理单位：{{ item.company}}</span>
-                <span>路线名称：{{ item.routeName}}</span>
-                <span>路段：{{ item.route}}</span>
-                <span>汽车自然数：{{ item.carNum}}</span>
-                <span>汽车当量数：{{item.equivalent}}</span>
-                <span>V/C值：{{ item.vc}}</span>
-                <span>客车比例：{{ item.car}}</span>
-                <span>货车比例：{{ item.truck}}</span>
-                <span>年份：{{ item.year}}</span>
+        </ul>
+        <!--<div id="wrapper" ref="wrapper" :style="{height: wrapperHeight + 'px';margin-bottom: 0.5rem;}">-->
+          <div style="margin-bottom: 0.5rem;overflow: scroll">
+            <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+               <ul>
+                   <li class="tableItem" v-for="(item,index) in tableList" :key="index">
+                       <div class="table-name" @click="toggle(index)">观测站名称：{{item.name}}</div>
+                       <div class="table-content" v-show="showItem===index">
+                           <span>管理单位：{{ item.management}}</span>
+                           <span>路线名称：{{ item.roadName}}</span>
+                           <span>路段：{{ item.segment}}</span>
+                           <span>汽车自然数：{{ item.carNatural}}</span>
+                           <span>汽车当量数：{{item.carEquivalent}}</span>
+                           <span>V/C值：{{ item.vcNumber}}</span>
+                           <span>客车比例：{{ item.carRatio}}</span>
+                           <span>货车比例：{{ item.vanRatio}}</span>
+                           <span>年份：{{ item.year}}</span>
 
-            </div>
-        </li>
-    </ul>
+                       </div>
+                   </li>
+               </ul>
+            </mt-loadmore>
+        </div>
     <ul class="bottom">
         <li>
             <a href="./index.html">
@@ -120,10 +104,14 @@
 </html>
 <script src="../js/vue.min.js" type="text/javascript"></script>
 <script src="../js/mint-ui.js" type="text/javascript"></script>
+<script src="../js/back.js" type="text/javascript"></script>
+<script src="../js/axios.min.js" type="text/javascript"></script>
+<script src="../js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         data: {
+            baseUrl: baseUrl,
             pageItem: [
                 {
                     icon: '../images/table-icon.png',
@@ -164,145 +152,78 @@
             type: 4,
             show: '',
             xLabel: [],
-            value1: [[16.9,45057],[17.3,44000],[17.75,99897],[17.88,48479],[18.73,54801],[19.1,52485],[20.06,109357],[20.4,101061],[23.45,101693]],
-            dataList: [
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                },
-                {
-                    comName: '新郑管理处',
-                    routeName: '高速',
-                    route: '原阳至新庄段'
-                }
-            ],
-            tableList: [
-                {
-                    name: '新乡-原阳',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 32515,
-                    equivalent: 23130,
-                    vc: 0.56,
-                    car: 0.765,
-                    truck: 0.235,
-                    year: 2016
-                },
-                {
-                    name: '原阳-原阳互通',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 35691,
-                    equivalent: 24245,
-                    vc: 0.68,
-                    car: 0.715,
-                    truck: 0.285,
-                    year: 2016
-                },
-                {
-                    name: '原阳互通-郑州互通',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 71355,
-                    equivalent: 42561,
-                    vc: 1.4,
-                    car: 0.616,
-                    truck: 0.384,
-                    year: 2016
-                },
-                {
-                    name: '郑州互通-新区站',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 75341,
-                    equivalent: 51837,
-                    vc: 1.02 ,
-                    car: 0.718,
-                    truck: 0.282,
-                    year: 2016
-                },
-                {
-                    name: '郑州新区站-圃田',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 66259,
-                    equivalent: 42844,
-                    vc: 1.09,
-                    car: 0.659,
-                    truck: 0.341,
-                    year: 2016
-                },
-                {
-                    name: '圃田-京珠绕城互通',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 46552,
-                    equivalent: 34292,
-                    vc: 1.03,
-                    car: 0.770,
-                    truck: 0.230,
-                    year: 2016
-                },
-                {
-                    name: '京城绕城互通-薛店互通',
-                    company:'新郑管理处',
-                    routeName:'京港澳高速',
-                    route:'新乡至郑州',
-                    carNum: 25900,
-                    equivalent: 16264,
-                    vc: 0.97,
-                    car: 0.637,
-                    truck: 0.363,
-                    year: 2016
-                },
-                {
-                    name: '济焦焦晋互通-济焦焦温',
-                    company:'济洛中心',
-                    routeName:'长济高速',
-                    route:'济源至邵原段',
-                    carNum: 14379,
-                    equivalent: 20359,
-                    vc: 0.7,
-                    car: 0.536,
-                    truck: 0.107,
-                    year: 2016
-                },
-
-            ],
+            value1: [],
+            tableList: [],
+            dataObj: {},
+            management: '',
+            roadName: '',
+            segment: '',
+            year: '',
+            pageNum: 1,
+            wrapperHeight: 0,
+            allLoaded: false,
             showItem: '',
             leftBox: false,
             funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+                '重点监控设施状态','交通管制信息','收费站年度信息'],
         },
-        mounted() {
-            this.createCharts();
-        },
-        watch:{
 
+        mounted() {
+            this.getData();
+            this.getList();
         },
         methods: {
+            getData () {
+                var _this = this ;
+                axios.get(this.baseUrl + '/flow/count').then(function(res) {
+                    if (res.data.status === '000000') {
+                        _this.dataObj = res.data.data;
+                        res.data.data.list.map(function(item,index){
+                            _this.value1.push([item.rate,item.sum])
+                        });
+
+                        _this.createCharts();
+
+                    } else {
+                        MessageBox('提示', res.data.message);
+                    }
+
+                });
+            },
+            getList () {
+                var _this = this ;
+                axios.post(_this.baseUrl + '/flow/list', {
+                    management: _this.management,
+                    segment: _this.segment,
+                    roadName: _this.roadName,
+                    year: _this.year,
+                    pageNum: _this.pageNum
+                }).then( function(res) {
+                    if (res.data.status === '000000') {
+                        if(res.data.data.length) {
+                            if (_this.pageNum == 1) {
+                                _this.tableList = res.data.data;
+                            } else {
+                                res.data.data.map( function (i) {
+                                    _this.tableList.push(i) ;
+                                })
+                            }
+                            _this.pageNum ++ ;
+                        }
+                    }
+                });
+            },
+            handleSearch () {
+                this.pageNum = 1 ;
+                this.tableList = [];
+                this.getList();
+            },
+            loadBottom () {
+                this.$refs.loadmore.onBottomLoaded();
+                this.getList();
+                // this.allLoaded = true;
+
+            },
             createCharts () {
                 var charts1 = document.getElementById('container');
                 charts1.style.width = window.innerWidth+'px';
@@ -333,7 +254,7 @@
                         itemHeight : 10,
                         data : [
                             {
-                                name: '2017',
+                                name: this.dataObj.year,
                                 icon: '',
                                 textStyle:{
                                     color: '#fff',
@@ -399,7 +320,7 @@
                     ],
                     series : [
                         {
-                            name:'2017',
+                            name:this.dataObj.year,
                             type:'scatter',
                             data:this.value1,
                             itemStyle: {
@@ -426,6 +347,7 @@
                     charts1.resize()
 
                 }
+
             },
             turnTo (index){
                 window.location.href = './detail'+ index + '.html'

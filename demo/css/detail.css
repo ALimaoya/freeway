@@ -108,6 +108,7 @@ body{
 .search li label{
     line-height: 0.3rem;
     width: 40%;
+    text-align: right;
 }
 .search li select{
     width: 60%;
@@ -208,6 +209,15 @@ table thead tr{
 }
 .funcList li p {
     font-size: 0.14rem;
+}
+.search input{
+    height: 0.3rem;
+    line-height: 0.3rem;
+    width: 55%;
+    text-indent: 0.1rem;
+    color: #333;
+    font-size: 0.14rem;
+    margin-left: 0.1rem;
 }
 .table2-wrap{
     width: 100%;

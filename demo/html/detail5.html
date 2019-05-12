@@ -62,10 +62,14 @@
 </html>
 <script src="../js/vue.min.js" type="text/javascript"></script>
 <script src="../js/mint-ui.js" type="text/javascript"></script>
+<script src="../js/back.js" type="text/javascript"></script>
+<script src="../js/axios.min.js" type="text/javascript"></script>
+<script src="../js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
         data: {
+            baseUrl: baseUrl,
             pageItem: [
                 {
                     icon: '../images/table-icon.png',
@@ -107,8 +111,9 @@
             show: '',
             leftBox: false,
             funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-                '重点监控设施状态','交通管制信息','收费站年度信息','高精度三维可测实景','应急指挥视频终端'],
+                '重点监控设施状态','交通管制信息','收费站年度信息'],
             xAxis1: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+            dataObj: {},
             value1: [660,638,573,0,0,0,0,0,0,0,0,0],
             value2: [676,638,612,0,0,0,0,0,0,0,0,0],
             value3: [0,0,0,0,0,0,0,0,0,0,0,0],
@@ -116,9 +121,21 @@
 
         },
         mounted() {
-            this.createNowCharts();
+            this.getData();
         },
         methods: {
+            getData () {
+                var _this = this ;
+                axios.get(this.baseUrl + '/monitor/count').then(function(res) {
+                    if (res.data.status === '000000') {
+                        _this.dataObj = res.data.data;
+                        _this.createNowCharts();
+
+                    } else {
+                        MessageBox('提示', res.data.message);
+                    }
+                })
+            },
             createNowCharts () {
                 var charts1 = document.getElementById('container');
                 charts1.style.width = window.innerWidth+'px';
