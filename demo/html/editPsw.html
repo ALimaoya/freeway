@@ -97,11 +97,11 @@
 
                     return false ;
                 }
-                axios.post(this.baseUrl + 'manager/resetPassword',this.login).then( function(res){
+                axios.post(this.baseUrl + '/manager/resetPassword',this.login).then( function(res){
                     if (res.data.status === '000000') {
                         window.location.href = './login.html';
                     } else {
-                        this.$messageBox('提示', res.data.message);
+                        this.$toast('提示', res.data.message);
                     }
                 }).catch( function(err) {
                     console.log(err)

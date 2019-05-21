@@ -1,4 +1,4 @@
-var baseUrl = 'http://47.93.38.180:8080/';
+var baseUrl = 'http://47.93.38.180:8080';
 
 axios.interceptors.request.use(
     config => {
@@ -21,7 +21,7 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是200的情况
     function(error) {
-        if (error.response.status) {
+        if (error.response) {
             switch (error.response.status) {
                 // 401: 未登录
                 // 未登录则跳转登录页面，并携带当前页面的路径

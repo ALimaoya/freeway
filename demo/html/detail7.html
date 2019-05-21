@@ -168,7 +168,7 @@
         methods: {
             getData () {
                 var _this = this ;
-                axios.post(this.baseUrl + 'tollStation/list',this.searchData).then(function(res) {
+                axios.post(this.baseUrl + '/tollStation/list',this.searchData).then(function(res) {
                     if (res.data.status === '000000') {
                         if(res.data.data.length) {
                             if (_this.pageNum == 1) {

@@ -38,8 +38,9 @@
 <div id="app">
     <mt-header fixed title="个人中心"></mt-header>
     <div class="content">
-        <div class="btn" @click="editUser">编辑个人信息</div>
+        <!--<div class="btn" @click="editUser">编辑个人信息</div>-->
         <div class="btn" @click="changeLoginPsw">修改登陆密码</div>
+		<div class="btn" @click="logout">退出登录</div>
     </div>
 
     <ul class="bottom">
@@ -83,6 +84,10 @@
             editUser () {
 
             },
+			logout(){
+			    localStorage.removeItem('token');
+				window.location.href = '../html/login.html';
+			}
         }
     })
 </script>

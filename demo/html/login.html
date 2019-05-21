@@ -11,30 +11,34 @@
     <link rel="stylesheet" href="../css/global.css"/>
     <link rel="stylesheet" href="../css/mint-ui.css"/>
     <style>
-        body{
+        body {
             background: #2f6fad;
-            height: 100%;
         }
-        header{
+
+        header {
             font-size: 0.18rem;
             font-weight: bold;
             text-align: center;
             margin-top: 0.8rem;
         }
-        .login{
+
+        .login {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             margin-top: 0.3rem;
         }
-        .login li{
+
+        .login li {
             width: 70%;
         }
-        .mb20{
+
+        .mb20 {
             margin-bottom: 0.2rem;
         }
-        input{
+
+        input {
             width: 100%;
             margin: 0 auto;
             height: 0.4rem;
@@ -51,19 +55,19 @@
 </head>
 <body>
 <div id="app">
-    <header >河南省高速公路基础设施管理服务平台</header>
+    <header>河南省高速公路基础设施综合信息平台</header>
     <ul class="login">
         <li class="mb20">
-            <input placeholder="登陆账号" v-model="login.userName"/>
-        </li>
-        <li  class="mb20">
-            <input placeholder="登陆密码" v-model="login.password"/>
+            <input placeholder="登录账号" v-model="login.userName"/>
         </li>
         <li class="mb20">
-            <mt-button size="large" type="primary" @click.native="handleLogin">登陆</mt-button>
+            <input type="password" placeholder="登录密码" v-model="login.password"/>
+        </li>
+        <li class="mb20">
+            <mt-button size="large" type="primary" @click.native="handleLogin">登录</mt-button>
         </li>
         <li>
-            <span @click="editPsw()">修改密码</span>
+            <!-- <span @click="editPsw()">修改密码</span>-->
         </li>
     </ul>
 </div>
@@ -78,38 +82,49 @@
         el: '#app',
         data: {
             baseUrl: baseUrl,
-            login:{
+            login: {
                 userName: '',
                 password: ''
             }
 
         },
         mounted() {
+            // this.validateToken();
         },
         methods: {
-            handleLogin () {
+            validateToken() {
+                const token = localStorage.getItem('token');
+                if (token) {
+                    window.location.href = './index.html';
+                }
+            },
+            handleLogin() {
                 if (this.login.userName === '') {
-                    this.$toast('请输入登陆账号');
-                    return false ;
+                    this.$toast('请输入登录账号');
+                    return false;
                 }
-                if ( this.login.password === '') {
-                    this.$toast('请输入登陆密码');
-                    return false ;
+                if (this.login.password === '') {
+                    this.$toast('请输入登录密码');
+                    return false;
                 }
-                axios.post(this.baseUrl + '/manager/login',{
-                    userName: this.login.userName,
-                    password: this.login.password}).then( function(res){
+                var userName = this.login.userName;
+                var password = this.login.password;
+                axios.post(this.baseUrl + '/manager/login', {
+                    "userName": userName,
+                    "password": password
+                }).then(function (res) {
                     if (res.data.status === '000000') {
-                        localStorage.setItem('token',res.data.data);
+                        localStorage.setItem('token', res.data.data);
                         window.location.href = './index.html';
                     } else {
-                         this.$messageBox('提示', res.data.message);
+                        this.$messagebox.alert(res.data.message, '提示');
+
                     }
-                }).catch( function(err) {
-                    console.log(err)
+                }).catch(function (err) {
+                    // alert(JSON.stringify(err))
                 })
             },
-            editPsw () {
+            editPsw() {
                 window.location.href = './editPsw.html'
             }
         }

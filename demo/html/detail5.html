@@ -114,10 +114,10 @@
                 '重点监控设施状态','交通管制信息','收费站年度信息'],
             xAxis1: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
             dataObj: {},
-            value1: [660,638,573,0,0,0,0,0,0,0,0,0],
-            value2: [676,638,612,0,0,0,0,0,0,0,0,0],
-            value3: [0,0,0,0,0,0,0,0,0,0,0,0],
-            value4: [0,0,0,0,0,0,0,0,0,0,0,0],
+            value1: [],
+            value2: [],
+            value3: [],
+            value4: [],
 
         },
         mounted() {
@@ -128,7 +128,10 @@
                 var _this = this ;
                 axios.get(this.baseUrl + '/monitor/count').then(function(res) {
                     if (res.data.status === '000000') {
-                        _this.dataObj = res.data.data;
+                        _this.value1 = res.data.data.one;
+                        _this.value2 = res.data.data.two;
+                        _this.value3 = res.data.data.three;
+                        _this.value4 = res.data.data.four;
                         _this.createNowCharts();
 
                     } else {

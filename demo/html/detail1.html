@@ -18,103 +18,103 @@
 <div id="app">
     <mt-header fixed :title="pageItem[type].name">
         <router-link to="/" slot="left">
-            <mt-button class="menu-icon" @click="leftBox=true" ></mt-button>
+            <mt-button class="menu-icon" @click="leftBox=true"></mt-button>
         </router-link>
     </mt-header>
 
 
-        <mt-navbar class="mt50" v-model="selected2">
-            <mt-tab-item id="2-1" >路面</mt-tab-item>
-            <mt-tab-item id="2-2">桥梁</mt-tab-item>
-            <mt-tab-item id="2-3">隧道</mt-tab-item>
-        </mt-navbar>
-        <mt-tab-container v-model="selected2">
-            <mt-tab-container-item id="2-1">
-                <div id="container21" class="mainCharts"></div>
-                <ul class="baseDetail">
-                    <li>
-                        <div><span>{{dataObj1.totalDistance}}</span>公里</div>
-                        <div>全省路网里程</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj1.fourDistance}}</span>公里</div>
-                        <div>双向四车道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj1.sixDistance}}</span>公里</div>
-                        <div>双向六车道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj1.eightDistance}}</span>公里</div>
-                        <div>双向八车道</div>
-                    </li>
-                </ul>
-                <div class="charts-wrap">
-                    <div id="container2-11" ></div>
-                    <div id="container2-12" ></div>
-                    <div id="container2-13" ></div>
-                    <div id="container2-14" ></div>
-                </div>
-            </mt-tab-container-item>
-            <mt-tab-container-item id="2-2">
-                <div id="container22" class="mainCharts"></div>
-                <ul class="baseDetail">
-                    <li>
-                        <div><span>{{dataObj2.total}}</span>座</div>
-                        <div>全省桥梁</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj2.teda}}</span>座</div>
-                        <div>特大桥</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj2.da}}</span>座</div>
-                        <div>大桥</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj2.zhong}}</span>座</div>
-                        <div>中桥</div>
-                    </li>
-                </ul>
-                <div class="charts-wrap">
-                    <div id="container2-21" ></div>
-                    <div id="container2-22" ></div>
-                    <div id="container2-23" ></div>
-                    <div id="container2-24" ></div>
-                </div>
-            </mt-tab-container-item>
-            <mt-tab-container-item id="2-3">
-                <div id="container23" class="mainCharts"></div>
-                <ul class="baseDetail">
-                    <li>
-                        <div><span>{{dataObj3.total}}</span>座</div>
-                        <div>全省隧道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj3.techang}}</span>座</div>
-                        <div>特长隧道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj3.chang}}</span>座</div>
-                        <div>长隧道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj3.zhong}}</span>座</div>
-                        <div>中隧道</div>
-                    </li>
-                    <li>
-                        <div><span>{{dataObj3.duan}}</span>座</div>
-                        <div>短隧道</div>
-                    </li>
-                </ul>
-                <div class="charts-wrap">
-                    <div id="container2-31" ></div>
-                    <div id="container2-32" ></div>
-                    <div id="container2-33" ></div>
-                    <div id="container2-34" ></div>
-                </div>
-            </mt-tab-container-item>
-        </mt-tab-container>
+    <mt-navbar class="mt50" v-model="selected2">
+        <mt-tab-item id="2-1">路面</mt-tab-item>
+        <mt-tab-item id="2-2">桥梁</mt-tab-item>
+        <mt-tab-item id="2-3">隧道</mt-tab-item>
+    </mt-navbar>
+    <mt-tab-container v-model="selected2">
+        <mt-tab-container-item id="2-1">
+            <div id="container21" class="mainCharts"></div>
+            <ul class="baseDetail">
+                <li>
+                    <div><span>{{dataObj1.totalDistance}}</span>公里</div>
+                    <div>全省路网里程</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj1.fourDistance}}</span>公里</div>
+                    <div>双向四车道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj1.sixDistance}}</span>公里</div>
+                    <div>双向六车道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj1.eightDistance}}</span>公里</div>
+                    <div>双向八车道</div>
+                </li>
+            </ul>
+            <div class="charts-wrap">
+                <div id="container2-11"></div>
+                <div id="container2-12"></div>
+                <div id="container2-13"></div>
+                <div id="container2-14"></div>
+            </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="2-2">
+            <div id="container22" class="mainCharts"></div>
+            <ul class="baseDetail">
+                <li>
+                    <div><span>{{dataObj2.total}}</span>座</div>
+                    <div>全省桥梁</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj2.teda}}</span>座</div>
+                    <div>特大桥</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj2.da}}</span>座</div>
+                    <div>大桥</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj2.zhong}}</span>座</div>
+                    <div>中桥</div>
+                </li>
+            </ul>
+            <div class="charts-wrap">
+                <div id="container2-21"></div>
+                <div id="container2-22"></div>
+                <div id="container2-23"></div>
+                <div id="container2-24"></div>
+            </div>
+        </mt-tab-container-item>
+        <mt-tab-container-item id="2-3">
+            <div id="container23" class="mainCharts"></div>
+            <ul class="baseDetail">
+                <li>
+                    <div><span>{{dataObj3.total}}</span>座</div>
+                    <div>全省隧道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj3.techang}}</span>座</div>
+                    <div>特长隧道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj3.chang}}</span>座</div>
+                    <div>长隧道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj3.zhong}}</span>座</div>
+                    <div>中隧道</div>
+                </li>
+                <li>
+                    <div><span>{{dataObj3.duan}}</span>座</div>
+                    <div>短隧道</div>
+                </li>
+            </ul>
+            <div class="charts-wrap">
+                <div id="container2-31"></div>
+                <div id="container2-32"></div>
+                <div id="container2-33"></div>
+                <div id="container2-34"></div>
+            </div>
+        </mt-tab-container-item>
+    </mt-tab-container>
 
     <ul class="bottom">
         <li>
@@ -128,22 +128,23 @@
                 <image src="../images/detail.png"></image>
                 <span>详情</span>
             </a>
-        </li><li>
-        <a href="./mine.html">
-            <image src="../images/mine.png"></image>
-            <span>我的</span>
-        </a>
-    </li>
+        </li>
+        <li>
+            <a href="./mine.html">
+                <image src="../images/mine.png"></image>
+                <span>我的</span>
+            </a>
+        </li>
     </ul>
     <div class="leftBox" :class="leftBox?'slideRight':(leftBox===false?'slideLeft':'')">
         <mt-header class="sub-header" fixed title="功能选择">
             <router-link to="/" slot="left">
-                <mt-button class="back" @click="leftBox=false" ></mt-button>
+                <mt-button class="back" @click="leftBox=false"></mt-button>
             </router-link>
         </mt-header>
         <ul class="funcList">
             <li v-for="(item,index) in funcList" :key="index" @click="turnTo(index)">
-                <img  src="../images/function.png"/>
+                <img src="../images/function.png"/>
                 <p>{{item}}</p>
             </li>
         </ul>
@@ -155,8 +156,8 @@
 <script src="../js/vue.min.js" type="text/javascript"></script>
 <script src="../js/mint-ui.js" type="text/javascript"></script>
 <script src="../js/back.js" type="text/javascript"></script>
-<script src="../js/config.js" type="text/javascript"></script>
 <script src="../js/axios.min.js" type="text/javascript"></script>
+<script src="../js/config.js" type="text/javascript"></script>
 <script type="text/javascript">
     var vm = new Vue({
         el: '#app',
@@ -230,14 +231,14 @@
                 }
             ],
             leftBox: false,
-            funcList: ['年度通车里程','基础设施','技术状况评定','星级服务区','观测站交通流量',
-                '重点监控设施状态','交通管制信息','收费站年度信息'],
-            xAxis1: ['双向四车道','双向六车道','双向八车道'],
+            funcList: ['年度通车里程', '基础设施', '技术状况评定', '星级服务区', '观测站交通流量',
+                '重点监控设施状态', '交通管制信息', '收费站年度信息'],
+            xAxis1: ['双向四车道', '双向六车道', '双向八车道'],
             dataObj1: {},
             dataObj2: {},
             dataObj3: {},
-            xAxis2: ['特大桥','大桥','中桥','小桥'],
-            xAxis3: ['特长隧道','长隧道','中隧道','短隧道'],
+            xAxis2: ['特大桥', '大桥', '中桥', '小桥'],
+            xAxis3: ['特长隧道', '长隧道', '中隧道', '短隧道'],
         },
         mounted() {
             this.getData();
@@ -257,47 +258,44 @@
         //     }
         // },
         methods: {
-            getData () {
-                var _this = this ;
-                axios.get(this.baseUrl + '/base/road/count').then(function(res) {
+            getData() {
+                var _this = this;
+                axios.get(this.baseUrl + '/base/road/count').then(function (res) {
                     if (res.data.status === '000000') {
                         _this.dataObj1 = res.data.data;
 
                     } else {
                         MessageBox('提示', res.data.message);
                     }
-                }).then(function (){
-                    axios.get(this.baseUrl + '/base/bridge/count').then(function(res) {
+                }).then(function () {
+                    axios.get(this.baseUrl + '/base/bridge/count').then(function (res) {
                         if (res.data.status === '000000') {
                             _this.dataObj2 = res.data.data;
-
                         } else {
                             MessageBox('提示', res.data.message);
                         }
+                    }).then(function () {
+                        axios.get(this.baseUrl + '/base/tunnel/count').then(function (res) {
+                            if (res.data.status === '000000') {
+                                _this.dataObj3 = res.data.data;
+                                _this.createBase(1);
+                                _this.createNowCharts();
+                            } else {
+                                MessageBox('提示', res.data.message);
+                            }
+                        });
                     });
-
-                }).then(function () {
-                    axios.get(this.baseUrl + '/base/tunnel/count').then(function(res) {
-                        if (res.data.status === '000000') {
-                            _this.dataObj3 = res.data.data;
-                            _this.createBase(1);
-                            _this.createNowCharts();
-                        } else {
-                            MessageBox('提示', res.data.message);
-                        }
-                    });
-
                 });
             },
             // 基础设施
-            createBase (index) {
-                var _this = this ;
+            createBase(index) {
+                var _this = this;
                 var dom1 = document.getElementById('container21');
                 var dom2 = document.getElementById('container22');
                 var dom3 = document.getElementsByClassName("mainCharts")[2];
-                dom1.style.width = window.innerWidth+'px';
-                dom2.style.width = window.innerWidth+'px';
-                dom3.style.width = window.innerWidth+'px';
+                dom1.style.width = window.innerWidth + 'px';
+                dom2.style.width = window.innerWidth + 'px';
+                dom3.style.width = window.innerWidth + 'px';
                 var charts = [];
                 var myChart = echarts.init(dom1);
                 // option = null;
@@ -318,26 +316,30 @@
                     //     trigger: 'item',
                     //     formatter: "{a} <br/>{b} : {c} ({d}%)"
                     // },
-                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    color: ['#E5ED26', '#33A1B8', '#DE99AE', '#4DEDE0'],
                     backgroundColor: '#191970',
-                    series : [
+                    series: [
                         {
                             type: 'pie',
-                            radius : '45%',
+                            radius: '45%',
                             center: ['50%', '50%'],
                             selectedMode: 'single',
-                            data: (function() {
+                            data: (function () {
                                 var data1 = [];
                                 _this.dataObj1.moduleList.map(function (item) {
                                     data1.push(
-                                        {value: item.distance ,
-                                            name: item.module ,
+                                        {
+                                            value: item.distance,
+                                            name: item.module,
                                             label: {
                                                 normal: {
                                                     formatter: [
-                                                        item.module ,
-                                                        '管养里程：'+  item.distance+ 'km',
-                                                        '比例：'+ item.ratio +'%'].join('\n'),}}})
+                                                        item.module,
+                                                        '管养里程：' + item.distance + 'km',
+                                                        '比例：' + item.ratio + '%'].join('\n'),
+                                                }
+                                            }
+                                        })
                                 });
                                 console.log(data1);
                                 return data1
@@ -373,12 +375,12 @@
                     //     trigger: 'item',
                     //     formatter: "{a} <br/>{b} : {c} ({d}%)"
                     // },
-                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    color: ['#E5ED26', '#33A1B8', '#DE99AE', '#4DEDE0'],
                     backgroundColor: '#191970',
-                    series : [
+                    series: [
                         {
                             type: 'pie',
-                            radius : '45%',
+                            radius: '45%',
                             center: ['50%', '50%'],
                             selectedMode: 'single',
                             data: (function () {
@@ -386,70 +388,21 @@
 
                                 _this.dataObj2.moduleList.map(function (item) {
                                     arr.push({
-                                        value:item.num,
+                                        value: item.num,
                                         name: item.module,
                                         label: {
                                             normal: {
                                                 formatter: [
                                                     item.module,
-                                                    '桥梁数量：'+ item.num +'座',
-                                                    '比例：'+ item.ratio+ '%'
+                                                    '桥梁数量：' + item.num + '座',
+                                                    '比例：' + item.ratio + '%'
                                                 ].join('\n'),
                                             }
                                         }
                                     })
                                 });
-                                return arr ;
+                                return arr;
                             })(),
-                            //     [
-                            //     {
-                            //         value:3898,
-                            //         name: '还贷中心',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '还贷中心',
-                            //                     '桥梁数量：3898座',
-                            //                     '比例：24.91%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     },
-                            //     {value:7608, name: '交投集团',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '交投集团',
-                            //                     '桥梁数量：7608座',
-                            //                     '比例：38%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }},
-                            //     {
-                            //         value:653, name: '省公路局及省建投',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '省公路局及省建投',
-                            //                     '桥梁数量：653座',
-                            //                     '比例：4.24%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     },
-                            //     {
-                            //         value:3307, name: '其他主体',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '其他主体',
-                            //                     '隧道数量：3307座',
-                            //                     '比例：21.47%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     }
-                            // ],
                             itemStyle: {
                                 emphasis: {
                                     shadowBlur: 10,
@@ -481,87 +434,37 @@
                     //     trigger: 'item',
                     //     formatter: "{a} <br/>{b} : {c} ({d}%)"
                     // },
-                    color: ['#E5ED26','#33A1B8','#DE99AE','#4DEDE0'],
+                    color: ['#E5ED26', '#33A1B8', '#DE99AE', '#4DEDE0'],
                     backgroundColor: '#191970',
-                    series : [
+                    series: [
                         {
                             type: 'pie',
-                            radius : '45%',
+                            radius: '45%',
                             center: ['50%', '50%'],
                             selectedMode: 'single',
                             data: (function () {
                                 var arr = [];
-                                console.log(this,_this.dataObj3);
+                                console.log(this, _this.dataObj3);
 
                                 _this.dataObj3.moduleList.map(function (item) {
                                     arr.push(
-                                            {
-                                                value:item.num,
-                                                name: item.module,
-                                                label: {
-                                                    normal: {
-                                                        formatter: [
-                                                            item.module,
-                                                            '隧道数量：'+ item.num +'座',
-                                                            '比例：'+ item.ratio+'%'
-                                                        ].join('\n'),
-                                                    }
+                                        {
+                                            value: item.num,
+                                            name: item.module,
+                                            label: {
+                                                normal: {
+                                                    formatter: [
+                                                        item.module,
+                                                        '隧道数量：' + item.num + '座',
+                                                        '比例：' + item.ratio + '%'
+                                                    ].join('\n'),
                                                 }
                                             }
+                                        }
                                     )
                                 });
-                                return arr ;
+                                return arr;
                             })(),
-                            //     [
-                            //     {
-                            //         value:129,
-                            //         name: '还贷中心',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '还贷中心',
-                            //                     '隧道数量：129座',
-                            //                     '比例：45.42%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     },
-                            //     {value:20, name: '交投集团',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '交投集团',
-                            //                     '涵洞数量：20座',
-                            //                     '比例：7.04%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }},
-                            //     {
-                            //         value:14, name: '省公路局及省建投',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '省公路局及省建投',
-                            //                     '隧道数量：14座',
-                            //                     '比例：4.93%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     },
-                            //     {
-                            //         value:121, name: '其他主体',
-                            //         label: {
-                            //             normal: {
-                            //                 formatter: [
-                            //                     '其他主体',
-                            //                     '隧道数量：121座',
-                            //                     '比例：42.61%'
-                            //                 ].join('\n'),
-                            //             }
-                            //         }
-                            //     },
-                            //
-                            // ],
                             itemStyle: {
                                 emphasis: {
                                     shadowBlur: 10,
@@ -583,7 +486,7 @@
                     // })
                 }
             },
-            createNowCharts () {
+            createNowCharts() {
                 var charts1 = document.getElementById('container2-11');
                 var charts2 = document.getElementById('container2-12');
                 var charts3 = document.getElementById('container2-13');
@@ -596,19 +499,19 @@
                 var charts10 = document.getElementById('container2-32');
                 var charts11 = document.getElementById('container2-33');
                 var charts12 = document.getElementById('container2-34');
-                var charts = [],_this = this;
-                charts1.style.width = window.innerWidth+'px';
-                charts2.style.width = window.innerWidth+'px';
-                charts3.style.width = window.innerWidth+'px';
-                charts4.style.width = window.innerWidth+'px';
-                charts5.style.width = window.innerWidth+'px';
-                charts6.style.width = window.innerWidth+'px';
-                charts7.style.width = window.innerWidth+'px';
-                charts8.style.width = window.innerWidth+'px';
-                charts9.style.width = window.innerWidth+'px';
-                charts10.style.width = window.innerWidth+'px';
-                charts11.style.width = window.innerWidth+'px';
-                charts12.style.width = window.innerWidth+'px';
+                var charts = [], _this = this;
+                charts1.style.width = window.innerWidth + 'px';
+                charts2.style.width = window.innerWidth + 'px';
+                charts3.style.width = window.innerWidth + 'px';
+                charts4.style.width = window.innerWidth + 'px';
+                charts5.style.width = window.innerWidth + 'px';
+                charts6.style.width = window.innerWidth + 'px';
+                charts7.style.width = window.innerWidth + 'px';
+                charts8.style.width = window.innerWidth + 'px';
+                charts9.style.width = window.innerWidth + 'px';
+                charts10.style.width = window.innerWidth + 'px';
+                charts11.style.width = window.innerWidth + 'px';
+                charts12.style.width = window.innerWidth + 'px';
                 var myChart = echarts.init(charts1);
                 option = {
                     title: {
@@ -626,26 +529,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 2,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 2,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '交投集团（中原）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '交投集团（高发）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -659,60 +562,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis1,
+                            type: 'category',
+                            data: this.xAxis1,
                             name: '车道数',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '里程/km',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'交投集团（中原）',
-                            type:'bar',
+                            name: '交投集团（中原）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj1.zhongYuan.fourDistance,_this.dataObj1.zhongYuan.sixDistance,_this.dataObj1.zhongYuan.eightDistance],
+                            data: [_this.dataObj1.zhongYuan.fourDistance, _this.dataObj1.zhongYuan.sixDistance, _this.dataObj1.zhongYuan.eightDistance],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -735,10 +638,10 @@
                             }
                         },
                         {
-                            name:'交投集团（高发）',
-                            type:'bar',
+                            name: '交投集团（高发）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj1.gaoFa.fourDistance,_this.dataObj1.gaoFa.sixDistance,_this.dataObj1.gaoFa.eightDistance],
+                            data: [_this.dataObj1.gaoFa.fourDistance, _this.dataObj1.gaoFa.sixDistance, _this.dataObj1.gaoFa.eightDistance],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -789,63 +692,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis1,
+                            type: 'category',
+                            data: this.xAxis1,
                             name: '车道数',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '里程数/km',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj1.huanDai.fourDistance,_this.dataObj1.huanDai.sixDistance,_this.dataObj1.huanDai.eightDistance],
+                            data: [_this.dataObj1.huanDai.fourDistance, _this.dataObj1.huanDai.sixDistance, _this.dataObj1.huanDai.eightDistance],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -889,26 +792,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 2,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 2,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '省公路局',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '省建投',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -922,60 +825,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis1,
+                            type: 'category',
+                            data: this.xAxis1,
                             name: '车道数',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '里程/km',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'省公路局',
-                            type:'bar',
+                            name: '省公路局',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj1.shengGongLu.fourDistance,_this.dataObj1.shengGongLu.sixDistance,_this.dataObj1.shengGongLu.eightDistance],
+                            data: [_this.dataObj1.shengGongLu.fourDistance, _this.dataObj1.shengGongLu.sixDistance, _this.dataObj1.shengGongLu.eightDistance],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -998,10 +901,10 @@
                             }
                         },
                         {
-                            name:'省建投',
-                            type:'bar',
+                            name: '省建投',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:this.value1_32,
+                            data: this.value1_32,
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1053,63 +956,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis1,
+                            type: 'category',
+                            data: this.xAxis1,
                             name: '车道数',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '里程数/km',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj1.qiTa.fourDistance,_this.dataObj1.qiTa.sixDistance,_this.dataObj1.qiTa.eightDistance,],
+                            data: [_this.dataObj1.qiTa.fourDistance, _this.dataObj1.qiTa.sixDistance, _this.dataObj1.qiTa.eightDistance,],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1153,26 +1056,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 1,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 1,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '交投集团（中原）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '交投集团（高发）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -1186,60 +1089,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis2,
+                            type: 'category',
+                            data: this.xAxis2,
                             name: '桥梁分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '座',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'交投集团（中原）',
-                            type:'bar',
+                            name: '交投集团（中原）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.zhongYuan.teda,_this.dataObj2.zhongYuan.da,_this.dataObj2.zhongYuan.zhong,_this.dataObj2.zhongYuan.xiao],
+                            data: [_this.dataObj2.zhongYuan.teda, _this.dataObj2.zhongYuan.da, _this.dataObj2.zhongYuan.zhong, _this.dataObj2.zhongYuan.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1262,10 +1165,10 @@
                             }
                         },
                         {
-                            name:'交投集团（高发）',
-                            type:'bar',
+                            name: '交投集团（高发）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.gaoFa.teda,_this.dataObj2.gaoFa.da,_this.dataObj2.gaoFa.zhong,_this.dataObj2.gaoFa.xiao],
+                            data: [_this.dataObj2.gaoFa.teda, _this.dataObj2.gaoFa.da, _this.dataObj2.gaoFa.zhong, _this.dataObj2.gaoFa.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1314,63 +1217,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis2,
+                            type: 'category',
+                            data: this.xAxis2,
                             name: '桥梁分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '座',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.huanDai.teda,_this.dataObj2.huanDai.da,_this.dataObj2.huanDai.zhong,_this.dataObj2.huanDai.xiao],
+                            data: [_this.dataObj2.huanDai.teda, _this.dataObj2.huanDai.da, _this.dataObj2.huanDai.zhong, _this.dataObj2.huanDai.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1414,26 +1317,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 2,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 2,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '省公路局',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '省建投',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -1447,60 +1350,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis2,
+                            type: 'category',
+                            data: this.xAxis2,
                             name: '桥梁分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '座',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'省公路局',
-                            type:'bar',
+                            name: '省公路局',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.shengGongLu.teda,_this.dataObj2.shengGongLu.da,_this.dataObj2.shengGongLu.zhong,_this.dataObj2.shengGongLu.xiao],
+                            data: [_this.dataObj2.shengGongLu.teda, _this.dataObj2.shengGongLu.da, _this.dataObj2.shengGongLu.zhong, _this.dataObj2.shengGongLu.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1523,10 +1426,10 @@
                             }
                         },
                         {
-                            name:'省建投',
-                            type:'bar',
+                            name: '省建投',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.shengJiantou.teda,_this.dataObj2.shengJiantou.da,_this.dataObj2.shengJiantou.zhong,_this.dataObj2.shengJiantou.xiao],
+                            data: [_this.dataObj2.shengJiantou.teda, _this.dataObj2.shengJiantou.da, _this.dataObj2.shengJiantou.zhong, _this.dataObj2.shengJiantou.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1578,63 +1481,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis2,
+                            type: 'category',
+                            data: this.xAxis2,
                             name: '桥梁分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '座',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj2.qiTa.teda,_this.dataObj2.qiTa.da,_this.dataObj2.qiTa.zhong,_this.dataObj2.qiTa.xiao],
+                            data: [_this.dataObj2.qiTa.teda, _this.dataObj2.qiTa.da, _this.dataObj2.qiTa.zhong, _this.dataObj2.qiTa.xiao],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1678,26 +1581,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 1,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 1,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '交投集团（中原）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '交投集团（高发）',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -1711,60 +1614,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis3,
+                            type: 'category',
+                            data: this.xAxis3,
                             name: '隧道分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '座',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'交投集团（中原）',
-                            type:'bar',
+                            name: '交投集团（中原）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.zhongYuan.techang,_this.dataObj3.zhongYuan.chang,_this.dataObj3.zhongYuan.zhong,_this.dataObj3.zhongYuan.duan],
+                            data: [_this.dataObj3.zhongYuan.techang, _this.dataObj3.zhongYuan.chang, _this.dataObj3.zhongYuan.zhong, _this.dataObj3.zhongYuan.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1787,10 +1690,10 @@
                             }
                         },
                         {
-                            name:'交投集团（高发）',
-                            type:'bar',
+                            name: '交投集团（高发）',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.gaoFa.techang,_this.dataObj3.gaoFa.chang,_this.dataObj3.gaoFa.zhong,_this.dataObj3.gaoFa.duan],
+                            data: [_this.dataObj3.gaoFa.techang, _this.dataObj3.gaoFa.chang, _this.dataObj3.gaoFa.zhong, _this.dataObj3.gaoFa.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1840,63 +1743,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis3,
+                            type: 'category',
+                            data: this.xAxis3,
                             name: '隧道分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '座',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.huanDai.techang,_this.dataObj3.huanDai.chang,_this.dataObj3.huanDai.zhong,_this.dataObj3.huanDai.duan],
+                            data: [_this.dataObj3.huanDai.techang, _this.dataObj3.huanDai.chang, _this.dataObj3.huanDai.zhong, _this.dataObj3.huanDai.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -1940,26 +1843,26 @@
                         },
 
                     },
-                    legend : { //图标
+                    legend: { //图标
                         type: '',
                         top: '10%',
                         right: '5%',
-                        show : true,
-                        itemGap : 2,
-                        itemWidth : 20,
-                        itemHeight : 10,
-                        data : [
+                        show: true,
+                        itemGap: 2,
+                        itemWidth: 20,
+                        itemHeight: 10,
+                        data: [
                             {
                                 name: '省公路局',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             },
                             {
                                 name: '省建投',
                                 icon: 'square',
-                                textStyle:{
+                                textStyle: {
                                     color: '#fff',
                                 }
                             }
@@ -1973,60 +1876,60 @@
                         bottom: '3%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis3,
+                            type: 'category',
+                            data: this.xAxis3,
                             name: '隧道分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
                             name: '座',
-                            type : 'value',
+                            type: 'value',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'省公路局',
-                            type:'bar',
+                            name: '省公路局',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.shengGongLu.techang,_this.dataObj3.shengGongLu.chang,_this.dataObj3.shengGongLu.zhong,_this.dataObj3.shengGongLu.duan],
+                            data: [_this.dataObj3.shengGongLu.techang, _this.dataObj3.shengGongLu.chang, _this.dataObj3.shengGongLu.zhong, _this.dataObj3.shengGongLu.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -2049,10 +1952,10 @@
                             }
                         },
                         {
-                            name:'省建投',
-                            type:'bar',
+                            name: '省建投',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.shengJiantou.techang,_this.dataObj3.shengJiantou.chang,_this.dataObj3.shengJiantou.zhong,_this.dataObj3.shengJiantou.duan],
+                            data: [_this.dataObj3.shengJiantou.techang, _this.dataObj3.shengJiantou.chang, _this.dataObj3.shengJiantou.zhong, _this.dataObj3.shengJiantou.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -2104,63 +2007,63 @@
                         bottom: '10%',
                         containLabel: true
                     },
-                    xAxis : [
+                    xAxis: [
                         {
-                            type : 'category',
-                            data : this.xAxis3,
+                            type: 'category',
+                            data: this.xAxis3,
                             name: '隧道分类',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff',
+                            axisLabel: {
+                                color: '#fff',
                                 fontSize: 12,
                                 // interval:0,
-                                rotate:"-15"
+                                rotate: "-15"
                             },   // x轴字体颜色
                         }
                     ],
-                    yAxis : [
+                    yAxis: [
                         {
-                            type : 'value',
+                            type: 'value',
                             name: '座',
                             splitLine: {
                                 "show": false
                             },
                             axisTick: {
                                 alignWithLabel: true,
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
                             axisLine: {
-                                lineStyle:{
-                                    color:'#fff'
+                                lineStyle: {
+                                    color: '#fff'
                                 },
                             },
-                            axisLabel:{
-                                color:'#fff'
+                            axisLabel: {
+                                color: '#fff'
                             },
                         },
 
                     ],
-                    series : [
+                    series: [
                         {
-                            name:'直接访问',
-                            type:'bar',
+                            name: '直接访问',
+                            type: 'bar',
                             barWidth: '20%',
-                            data:[_this.dataObj3.qiTa.techang,_this.dataObj3.qiTa.chang,_this.dataObj3.qiTa.zhong,_this.dataObj3.qiTa.duan],
+                            data: [_this.dataObj3.qiTa.techang, _this.dataObj3.qiTa.chang, _this.dataObj3.qiTa.zhong, _this.dataObj3.qiTa.duan],
                             itemStyle: {
                                 normal: {
                                     color: new echarts.graphic.LinearGradient(
@@ -2196,8 +2099,8 @@
             },
 
             // 跳转到对应详情
-            turnTo (index) {
-                window.location.href = './detail'+ index + '.html'
+            turnTo(index) {
+                window.location.href = './detail' + index + '.html'
 
             }
         }
